@@ -46,6 +46,7 @@ void ScalarConverter::convert(std::string str) {
 		*stypes.dValue = std::stod(str);
 	}
 	catch(std::invalid_argument &invalid) {
+		deleteScaleTypes(&stypes);
 		error_log();
 		return ;
 	}
