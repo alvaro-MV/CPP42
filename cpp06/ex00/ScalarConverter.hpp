@@ -20,4 +20,8 @@ class ScalarConverter {
 		static void convert(std::string str);
 };
 
+void error_log();
+void printCharType(scaleTypes *stypes);
+void printScaleTypes(scaleTypes *stypes);
+
 #endif

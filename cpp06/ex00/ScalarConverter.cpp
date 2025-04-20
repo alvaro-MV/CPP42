@@ -1,45 +1,5 @@
 #include "ScalarConverter.hpp"
 
-void error_log() {
-	std::cerr << "char: impossible"	<< std::endl;
-	std::cerr << "int: impossible"	<< std::endl;
-	std::cerr << "float: impossible" << std::endl;
-	std::cerr << "double: impossible" << std::endl;
-}
-
-void safe_cast_int(scaleTypes *stypes) {
-	if (std::isinf(*stypes->dValue) || std::isnan(*stypes->dValue))
-		stypes->dValue = NULL;
-	else if (*stypes->dValue > std::numeric_limits<int>::max()) {
-        *stypes->iValue = std::numeric_limits<int>::max();
-    } else if (*stypes->dValue < std::numeric_limits<int>::min()) {
-        *stypes->iValue = std::numeric_limits<int>::min();
-    } else {
-        *stypes->iValue = static_cast<int>(*stypes->dValue);
-    }
-}
-
-void printCharType(scaleTypes *stypes)
-{
-	if (!stypes->chValue)
-		std::cout << "char: impossible" << std::endl;
-	else if ((*stypes->chValue >= 0 && *stypes->chValue <= 31)
-		|| *stypes->chValue == 127)
-		std::cout << "char: Non displayable" << std::endl;
-	else
-		std::cout << "char: " << *stypes->chValue << std::endl;
-}
-
-void printScaleTypes(scaleTypes *stypes) {
-	printCharType(stypes);
-	if (stypes->iValue)
-		std::cout << "int: " << *stypes->iValue << std::endl;
-	else
-		std::cout << "int: impossible" << std::endl;
-	std::cout << "float: " << *stypes->fValue << "f" << std::endl;
-	std::cout << "double: " << *stypes->dValue << std::endl;
-}
-
 int allocScaleTypes(scaleTypes *stypes) {
 	try {
 		stypes->dValue = new double;
@@ -61,6 +21,19 @@ void deleteScaleTypes(scaleTypes *stypes) {
 	delete stypes->dValue;
 }
 
+void safe_cast_int(scaleTypes *stypes) {
+	if (std::isinf(*stypes->dValue) || std::isnan(*stypes->dValue))
+		stypes->iValue = NULL;
+	else if (*stypes->dValue > std::numeric_limits<int>::max()) {
+        *stypes->iValue = std::numeric_limits<int>::max();
+    }
+	else if (*stypes->dValue < std::numeric_limits<int>::min()) {
+        *stypes->iValue = std::numeric_limits<int>::min();
+    }
+	else {
+        *stypes->iValue = static_cast<int>(*stypes->dValue);
+    }
+}
 void ScalarConverter::convert(std::string str) {
 	scaleTypes stypes;
 	
@@ -78,7 +51,7 @@ void ScalarConverter::convert(std::string str) {
 	}
 	*stypes.fValue = static_cast<float>(*stypes.dValue);
 	safe_cast_int(&stypes);
-	if (stypes.iValue)
+	if (stypes.iValue && *stypes.iValue < 255)
 		*stypes.chValue = static_cast<char>(*stypes.iValue);
 	else
 		stypes.chValue = NULL;
