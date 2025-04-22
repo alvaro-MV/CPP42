@@ -6,6 +6,7 @@
 
 int main(int, char**)
 {
+    const char *what_message;
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
@@ -45,7 +46,10 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        what_message = e.what();
+        std::cerr << what_message << '\n';
+        delete[] what_message;
+        what_message = NULL;
     }
     try
     {
@@ -53,7 +57,10 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+
+        what_message = e.what();
+        std::cerr << what_message << '\n';
+        delete[] what_message;
     }
     delete [] mirror;//
     return 0;
