@@ -1,20 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <forward_list>
+#include <deque>
 
-// Generic push_back_helper for containers with push_back
 template<typename Container>
 void push_back_helper(Container& c, int value, std::false_type) {
     c.push_back(value);
 }
 
-// Specialization for std::forward_list (which doesn't support push_back)
 template<typename Container>
 void push_back_helper(Container&, int, std::true_type) {
-    // Do nothing – we should never reach here for forward_list
+    // No haces nada.
 }
 
-// Type trait emulation for C++98: checks if T is std::forward_list<int>
 template<typename T>
 struct is_forward_list {
     static const bool value = false;
@@ -25,7 +23,6 @@ struct is_forward_list<std::forward_list<int> > {
     static const bool value = true;
 };
 
-// Main push_back that dispatches to helper
 template<typename T>
 void push_back(T& ret, int next) {
     push_back_helper(ret, next, std::integral_constant<bool, is_forward_list<T>::value>());
