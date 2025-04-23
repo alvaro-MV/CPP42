@@ -4,6 +4,9 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <forward_list>
+#include <typeinfo>
+#include <stdexcept>
 
 template<typename T>
 T easyfind(T container, int pattern);
