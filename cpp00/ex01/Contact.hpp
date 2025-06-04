@@ -21,11 +21,12 @@ class Contact
 	
 	public:
 		Contact();
-		Contact (const Contact &a);
 		~Contact();
-		Contact & operator = (const Contact &a);
 
 		void display_contact();
+		std::string	get_first_name(void);
+		std::string	get_last_name(void);
+		std::string	get_nickname(void);
 		void init_contact();
 		int  is_init();
 };

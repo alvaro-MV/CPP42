@@ -17,52 +17,89 @@ Contact::~Contact()
 	std::cout << "Hasta luego" << this->first_name << std::endl;
 }
 
-void Contact::display_contact()
+std::string	Contact::get_first_name(void)
 {
-	int i = 0, finished_info = 0, pos = 0, pos_offset = 0;
-	char padding[10];
-	size_t len_rest;
-	std::string str_to_display[3] = {first_name, last_name, nickname};
-	
-	while (finished_info < 3) 
+	return (this->first_name);
+}
+
+std::string	Contact::get_last_name(void)
+{
+	return (this->last_name);
+}
+
+std::string	Contact::get_nickname(void)
+{
+	return (this->nickname);
+}
+
+
+std::string	padd_2_10(size_t len)
+{
+	std::string	ret = "";
+
+	for (int i  = 0; i < 10 - len; i++)
+		ret += " ";
+	return (ret);
+}
+
+std::string	get_string_10_wide(std::string s, size_t field)
+{
+	static	size_t		count[3];
+	std::string	ten_wide;
+	size_t		len_wide;
+
+	if (field == -1)
 	{
-		finished_info = 0;
-		i = 0;
-		while (i < 3)
-		{
-			if (pos < str_to_display[i].length())
-			{
-				if (i == 0)
-					std::cout << "|";
-				if (strlen(&str_to_display[i].data()[pos - pos_offset]) <= 10)
-				{
-					std::cout << str_to_display[i].substr(pos - pos_offset, 10);
-					len_rest = strlen(&str_to_display[i].data()[pos - pos_offset]);
-				}
-				else
-				{
-					if (!pos)
-						std::cout << str_to_display[i].substr(pos, 9) << ".";
-					else
-						std::cout << str_to_display[i].substr(pos - pos_offset, 9) << ".";
-					len_rest = 10;
-				}
-				if (i < 2)
-				{
-					memset(padding, 0, 10);
-					memset(padding, 32, 10 - len_rest);
-					std::cout << padding;
-					std::cout  << "|" ;
-				}
-			}
-			else
-				finished_info++;
-			i++;
-		}
-		std::cout << std::endl;
-		pos += 10;
-		pos_offset++;
+		if (field == -1)
+			bzero(count, 3 * sizeof(size_t));
+		return ("");
 	}
+	else if (count[field] > s.length())
+		return ("");
+	ten_wide = s.substr(count[field], 9);
+	len_wide = ten_wide.length();
+	if (len_wide < 9 || s.length() == 9)
+		ten_wide = padd_2_10(len_wide) + ten_wide;
+	else
+		ten_wide += std::string(".");
+	ten_wide += "|";
+	count[field] += 9;
+	return (ten_wide);
+}
+
+void	print_10_wide(std::string name_10_wide)
+{
+	if (!name_10_wide.empty())
+		std::cout << name_10_wide;
+	else
+		std::cout << padd_2_10(0) << "|";
+}
+
+void	Contact::display_contact(void)
+{
+	std::string	f;
+	std::string	l;
+	std::string	n;
+	size_t		format = 0;
+
+	do {
+		f = get_string_10_wide(this->first_name, 0);
+		l = get_string_10_wide(this->last_name, 1);
+		n = get_string_10_wide(this->nickname, 2);
+		if (f.empty() && l.empty() && n.empty())
+		{
+			get_string_10_wide("", -1);
+			return ;
+		}
+		if (format > 0)
+			std::cout << "   ";
+		print_10_wide(f);
+		print_10_wide(l);
+		print_10_wide(n);
+		format++;
+		std::cout << std::endl;
+	}
+	while (!f.empty() || !l.empty() || !n.empty());
 }
 
 void Contact::init_contact()
