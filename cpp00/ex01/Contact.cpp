@@ -14,7 +14,7 @@ Contact::Contact() {
 
 Contact::~Contact()
 {
-	std::cout << "Hasta luego" << this->first_name << std::endl;
+	std::cout << "Hasta luego " << this->first_name << std::endl;
 }
 
 std::string	Contact::get_first_name(void)
@@ -80,7 +80,7 @@ void	Contact::display_contact(void)
 	std::string	f;
 	std::string	l;
 	std::string	n;
-	size_t		format = 0;
+	size_t		line_number = 0;
 
 	do {
 		f = get_string_10_wide(this->first_name, 0);
@@ -91,12 +91,12 @@ void	Contact::display_contact(void)
 			get_string_10_wide("", -1);
 			return ;
 		}
-		if (format > 0)
+		if (line_number > 0)
 			std::cout << "   ";
 		print_10_wide(f);
 		print_10_wide(l);
 		print_10_wide(n);
-		format++;
+		line_number++;
 		std::cout << std::endl;
 	}
 	while (!f.empty() || !l.empty() || !n.empty());
@@ -110,16 +110,44 @@ void Contact::init_contact()
 	std::string phone_number;
 	std::string darkest_secret;
 
-	std::cout << "Enter first name: ";
-	std::cin >> first_name;
+	do {
+		std::cout << "Enter first name: ";
+		if (first_name.empty())
+			first_name = "-----";
+		if (!(std::cin >> first_name))
+		{
+			std::cerr << "Invalid first_name.\n";
+			std::cin.clear();
+			std::cin.ignore();
+		}
+	} while (first_name.empty());
 	this->first_name = first_name;
 
-	std::cout << "Enter last name: ";
-	std::cin >> last_name;
+	do {
+		std::cout << "Enter last name: ";
+		if (last_name.empty())
+			last_name = "-----";
+		if (!(std::cin >> first_name))
+		{
+			std::cerr << "Invalid last_name.\n";
+			std::cin.clear();
+			std::cin.ignore();
+		}
+	} while (last_name.empty());
 	this->last_name = last_name;
 
-	std::cout << "Enter nickname: ";
-	std::cin >> nickname;
+	do {
+		std::cout << "Enter nickname: ";
+		if (nickname.empty())
+			nickname = "-----";
+		if (!(std::cin >> nickname))
+		{
+			std::cerr << "Invalid nickname.\n";
+			std::cin.clear();
+			std::cin.ignore();
+		}
+		std::cin >> nickname;
+	} while (nickname.empty());
 	this->nickname = nickname;
 
 	int n_digit = 0;
@@ -131,13 +159,20 @@ void Contact::init_contact()
 		std::cin >> phone_number;
 		while (std::isdigit(phone_number[n_digit]) && phone_number[n_digit])
 			n_digit++;
-	}
-	while (n_digit < phone_number.length());
-
+	} while (n_digit < phone_number.length());
 	this->phone_number = phone_number;
 
-	std::cout << "Enter darkest secret: ";
-	std::cin >> darkest_secret;
+	do {
+		std::cout << "Enter darkest secret: ";
+		if (darkest_secret.empty())
+			darkest_secret = "-----";
+		if (!(std::cin >> darkest_secret))
+		{
+			std::cerr << "Invalid darkest secret";
+			std::cin.clear();
+			std::cin.ignore();
+		}
+	} while (darkest_secret.empty());
 	this->darkest_secret = darkest_secret;
 	this->init = 1;
 

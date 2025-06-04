@@ -12,8 +12,9 @@ PhoneBook::PhoneBook()
 	while (1)
 	{
 		std::cout << std::endl << "$ ";
-		std::cin >> command;
-		if (command.compare("EXIT") == 0)
+		if (!(std::cin >> command))
+			break ;
+		if (command.compare("EXIT") == 0 || command.empty())
 			break ;
 		else if (command.compare("ADD") == 0)
 		{
