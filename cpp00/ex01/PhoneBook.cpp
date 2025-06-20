@@ -6,6 +6,7 @@ PhoneBook::PhoneBook()
 
 	std::string	command;
 	char contact_break[40];
+	this->contact_idx = 0;
 	int i;
 		
 	memset(contact_break, 45, 40);

@@ -37,12 +37,12 @@ std::string	padd_2_10(size_t len)
 {
 	std::string	ret = "";
 
-	for (int i  = 0; i < 10 - len; i++)
+	for (size_t i  = 0; i < 10 - len; i++)
 		ret += " ";
 	return (ret);
 }
 
-std::string	get_string_10_wide(std::string s, size_t field)
+std::string	get_string_10_wide(std::string s, int field)
 {
 	static	size_t		count[3];
 	std::string	ten_wide;
@@ -111,9 +111,11 @@ void Contact::init_contact()
 	std::string darkest_secret;
 
 	do {
-		std::cout << "Enter first name: ";
 		if (first_name.empty())
+		{
+			std::cout << "Enter first name: ";
 			first_name = "-----";
+		}
 		if (!(std::cin >> first_name))
 		{
 			std::cerr << "Invalid first_name.\n";
@@ -124,10 +126,9 @@ void Contact::init_contact()
 	this->first_name = first_name;
 
 	do {
-		std::cout << "Enter last name: ";
 		if (last_name.empty())
-			last_name = "-----";
-		if (!(std::cin >> first_name))
+			(std::cout << "Enter last name: ", last_name = "-----");
+		if (!(std::cin >> last_name))
 		{
 			std::cerr << "Invalid last_name.\n";
 			std::cin.clear();
@@ -137,20 +138,18 @@ void Contact::init_contact()
 	this->last_name = last_name;
 
 	do {
-		std::cout << "Enter nickname: ";
 		if (nickname.empty())
-			nickname = "-----";
+			(std::cout << "Enter nickname: ", nickname = "-----");
 		if (!(std::cin >> nickname))
 		{
 			std::cerr << "Invalid nickname.\n";
 			std::cin.clear();
 			std::cin.ignore();
 		}
-		std::cin >> nickname;
 	} while (nickname.empty());
 	this->nickname = nickname;
 
-	int n_digit = 0;
+	size_t n_digit = 0;
 	do {
 		if (n_digit < phone_number.length())
 			std::cout << "Incorrect phone number" << std::endl;
@@ -163,9 +162,8 @@ void Contact::init_contact()
 	this->phone_number = phone_number;
 
 	do {
-		std::cout << "Enter darkest secret: ";
 		if (darkest_secret.empty())
-			darkest_secret = "-----";
+			(std::cout << "Enter darkest secret: ", darkest_secret = "-----");
 		if (!(std::cin >> darkest_secret))
 		{
 			std::cerr << "Invalid darkest secret";

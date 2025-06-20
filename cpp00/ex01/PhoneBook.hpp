@@ -7,7 +7,7 @@ class PhoneBook
 {
 	private:
 		Contact	contact_array[8];
-		int		contact_idx = 0;
+		int		contact_idx;
 
 	public:
 		PhoneBook();

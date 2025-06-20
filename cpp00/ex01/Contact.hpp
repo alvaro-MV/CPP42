@@ -16,8 +16,7 @@ class Contact
 		std::string	nickname;
 		std::string phone_number;
 		std::string darkest_secret;
-
-	int	init = 0;
+		int	init;
 	
 	public:
 		Contact();
