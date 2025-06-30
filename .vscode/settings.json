@@ -2,6 +2,10 @@
 	"files.associations": {
 		"iostream": "cpp",
 		"forward_list": "cpp",
-		"stdexcept": "cpp"
+		"stdexcept": "cpp",
+		"ostream": "cpp",
+		"algorithm": "cpp",
+		"iosfwd": "cpp",
+		"vector": "cpp"
 	}
 }
