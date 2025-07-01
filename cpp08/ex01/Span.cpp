@@ -1,10 +1,8 @@
 #include "Span.hpp"
 
-void Span::addNumber(int n) {
+void	Span::insert_and_recalc(int n) {
 	std::multiset<int>::iterator	it;
 
-	// if (span.size() == N)
-	// 	throw OutOfRangeExceptcion();
 	span.insert(n);
 	it = span.find(n);
 	if (span.size() > 1)
@@ -28,19 +26,58 @@ void Span::addNumber(int n) {
 	min = n < min ? n : min;
 }
 
-template <class Inputiterator>
-void Span::addnumber(int n, Inputiterator first, Inputiterator last) {
-	
+void Span::addNumber(int n) {
+	try {
+		if (span.size() == N)
+			throw Span::OutOfSpaceException(N);
+		insert_and_recalc(n);
+	}
+	catch (Span::OutOfSpaceException &e) {
+		const char	*error = e.what();
+		std::cout << error << std::endl;
+	}
 }
 
 unsigned int Span::shortestSpan() {
-	// if (span.size() < 2)
-	// 	throw NotEnoughNumbersinSpan();
-	return (shortest);
+	try {
+		if (span.size() < 2)
+			throw Span::Less2ThanException(N);
+		return (shortest);
+	}
+	catch (Span::Less2ThanException &e) {
+		const char	*error = e.what();
+		std::cout << error << std::endl;
+		return (-1);
+	}
 }
 
 unsigned int Span::longestSpan() {
-	// if (span.size() < 2)
-	// 	throw NotEnoughNumbersinSpan();
-	return (max - min);
+	try {
+		if (span.size() < 2)
+			throw Span::Less2ThanException(N);
+		return (max - min);
+	}
+	catch (Span::Less2ThanException &e) {
+		const char	*error = e.what();
+		std::cout << error << std::endl;
+		return (-1);
+	}
+}
+
+const char	*Span::OutOfSpaceException::what(void) const throw() {
+	std::string problem = "OutOfSpaceException: "
+	+ std::to_string(this->_N)
+	+" slots filled.\n";
+	
+	char *ret = new char[problem.length() + 1];
+	std::strcpy(ret, problem.c_str());
+	return (ret);
+}
+
+const char	*Span::Less2ThanException::what(void) const throw() {
+	std::string problem = "Less2ThanException: only 1 element filled. Impossible to calculate spans.\n";
+	
+	char *ret = new char[problem.length() + 1];
+	std::strcpy(ret, problem.c_str());
+	return (ret);
 }

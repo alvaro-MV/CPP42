@@ -3,7 +3,11 @@
 
 #include <iostream>
 #include <set>
+#include <vector>
 #include <utility>
+#include <string>
+#include <cstring>
+#include <limits>
 
 class Span {
 	private:
@@ -12,13 +16,15 @@ class Span {
 		int		shortest;
 		int		max;
 		int		min;
+
+		void	insert_and_recalc(int n);
 	
 	public:
 	
 		Span(unsigned int N): N(N) {
-			shortest = 2147483647;
+			shortest = std::numeric_limits<int>::max();
 			max = 0;
-			min = 2147483647;
+			min =  std::numeric_limits<int>::max();
 		}
 		Span(const Span& s) {
 			N = s.N;
@@ -42,11 +48,41 @@ class Span {
 		void			addNumber(int n);
 
 		template <class Inputiterator>
-		void			addnumber(int n, Inputiterator first, Inputiterator last);
+		void addRange(Inputiterator first, Inputiterator last) {
+			try {
+				while (first != last) {
+					if (span.size() == N)
+						throw  Span::OutOfSpaceException(N);
+					insert_and_recalc(*first);
+					first++;
+				}
+			}
+			catch (Span::OutOfSpaceException &e) {
+				const char	*error = e.what();
+				std::cout << error << std::endl;
+			}
+		}
 
 		unsigned int	shortestSpan();
 		unsigned int	longestSpan();
 
+		class OutOfSpaceException : public std::exception {
+			private:
+				size_t _N;
+
+			public:
+				OutOfSpaceException(unsigned int N): _N(N){}
+				const char* what(void) const throw();
+		};
+
+		class Less2ThanException : public std::exception {
+			private:
+				size_t _N;
+
+			public:
+				Less2ThanException(unsigned int N): _N(N) {}
+				const char* what(void) const throw();
+		};
 };
 
 #endif
