@@ -69,24 +69,24 @@ int	main(void) {
 }
 
 
-// int	main(void) {
-// 	vector<shared_ptr<Song>> v {
-// 	make_shared<Song>("Bob Dylan", "The Times They Are A Changing"),
-// 	make_shared<Song>("Aretha Franklin", "Bridge Over Troubled Water"),
-// 	make_shared<Song>("Thalía", "Entre El Mar y Una Estrella")
-// 	};
+int	main(void) {
+	vector<shared_ptr<Song>> v {
+	make_shared<Song>("Bob Dylan", "The Times They Are A Changing"),
+	make_shared<Song>("Aretha Franklin", "Bridge Over Troubled Water"),
+	make_shared<Song>("Thalía", "Entre El Mar y Una Estrella")
+	};
 
-// 	vector<shared_ptr<Song>> v2;
-// 	remove_copy_if(v.begin(), v.end(), back_inserter(v2), [] (shared_ptr<Song> s) 
-// 	{
-// 		return s->artist.compare("Bob Dylan") == 0;
-// 	});
+	vector<shared_ptr<Song>> v2;
+	remove_copy_if(v.begin(), v.end(), back_inserter(v2), [] (shared_ptr<Song> s) 
+	{
+		return s->artist.compare("Bob Dylan") == 0;
+	});
 
-// 	for (const auto& s : v2)
-// 	{
-// 		cout << s->artist << ":" << s->title << endl;
-// 	}
-// }
+	for (const auto& s : v2)
+	{
+		cout << s->artist << ":" << s->title << endl;
+	}
+}
 
 // int	main(void) {
 // 	vector<SharedPointer<Song>> v {
