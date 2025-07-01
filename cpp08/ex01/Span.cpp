@@ -27,41 +27,21 @@ void	Span::insert_and_recalc(int n) {
 }
 
 void Span::addNumber(int n) {
-	try {
-		if (span.size() == N)
-			throw Span::OutOfSpaceException(N);
-		insert_and_recalc(n);
-	}
-	catch (Span::OutOfSpaceException &e) {
-		const char	*error = e.what();
-		std::cout << error << std::endl;
-	}
+	if (span.size() == N)
+		throw Span::OutOfSpaceException(N);
+	insert_and_recalc(n);
 }
 
 unsigned int Span::shortestSpan() {
-	try {
-		if (span.size() < 2)
+	if (span.size() < 2)
 			throw Span::Less2ThanException(N);
-		return (shortest);
-	}
-	catch (Span::Less2ThanException &e) {
-		const char	*error = e.what();
-		std::cout << error << std::endl;
-		return (-1);
-	}
+	return (shortest);
 }
 
 unsigned int Span::longestSpan() {
-	try {
-		if (span.size() < 2)
-			throw Span::Less2ThanException(N);
-		return (max - min);
-	}
-	catch (Span::Less2ThanException &e) {
-		const char	*error = e.what();
-		std::cout << error << std::endl;
-		return (-1);
-	}
+	if (span.size() < 2)
+		throw Span::Less2ThanException(N);
+	return (max - min);
 }
 
 const char	*Span::OutOfSpaceException::what(void) const throw() {

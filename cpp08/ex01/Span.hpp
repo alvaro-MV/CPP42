@@ -49,17 +49,11 @@ class Span {
 
 		template <class Inputiterator>
 		void addRange(Inputiterator first, Inputiterator last) {
-			try {
-				while (first != last) {
-					if (span.size() == N)
-						throw  Span::OutOfSpaceException(N);
-					insert_and_recalc(*first);
-					first++;
-				}
-			}
-			catch (Span::OutOfSpaceException &e) {
-				const char	*error = e.what();
-				std::cout << error << std::endl;
+			while (first != last) {
+				if (span.size() == N)
+					throw  Span::OutOfSpaceException(N);
+				insert_and_recalc(*first);
+				first++;
 			}
 		}
 
