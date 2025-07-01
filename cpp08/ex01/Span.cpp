@@ -55,7 +55,7 @@ const char	*Span::OutOfSpaceException::what(void) const throw() {
 }
 
 const char	*Span::Less2ThanException::what(void) const throw() {
-	std::string problem = "Less2ThanException: only 1 element filled. Impossible to calculate spans.\n";
+	std::string problem = "Less2ThanException: less than two element filled. Impossible to calculate spans.\n";
 	
 	char *ret = new char[problem.length() + 1];
 	std::strcpy(ret, problem.c_str());

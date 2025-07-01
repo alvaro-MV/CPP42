@@ -1,13 +1,14 @@
 #ifndef SPAN_H
 # define SPAN_H
 
-#include <iostream>
-#include <set>
-#include <vector>
-#include <utility>
-#include <string>
-#include <cstring>
-#include <limits>
+# include <iostream>
+# include <set>
+# include <vector>
+# include <utility>
+# include <string>
+# include <cstring>
+# include <ctime>
+# include <limits>
 
 class Span {
 	private:
