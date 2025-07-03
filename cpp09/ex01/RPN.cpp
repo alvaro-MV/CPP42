@@ -24,39 +24,60 @@ look_obj	lookahead(tokens::iterator i, tokens::iterator e, int dist)
 	else return (END);
 }
 
+// int			pop(tokens::iterator &i, tokens::iterator e)
+// {
+	
+//     int 	num;
+//     bool	itoa_fail;
+
+// 	num = itoa(*i, itoa_fail);
+// 	if (itoa_fail == false)
+// 		return (++i, num);
+// 	else if (!std::string(*i).compare("+"))
+// 		return (++i, add);
+// 	else if (!std::string(*i).compare("-"))
+// 		return (++i, sust);
+// 	else if (!std::string(*i).compare("*"))
+// 		return (++i, mult);
+// 	else if (!std::string(*i).compare("/"))
+// 		return (++i, divs);
+// 	else if (i == e)
+// 		return (end);
+// 	else
+// 		return (end);
+// }
+
 int			pop(tokens::iterator &i, tokens::iterator e)
 {
 	
     int 	num;
     bool	itoa_fail;
 
-	std::cout << "pop dentro, el string que convierte es : " << *i << std::endl;
 	num = itoa(*i, itoa_fail);
 	if (itoa_fail == false)
-		return (++i, num);
+		return (--i, num);
 	else if (!std::string(*i).compare("+"))
-		return (++i, add);
+		return (--i, add);
 	else if (!std::string(*i).compare("-"))
-		return (++i, sust);
+		return (--i, sust);
 	else if (!std::string(*i).compare("*"))
-		return (++i, mult);
+		return (--i, mult);
 	else if (!std::string(*i).compare("/"))
-		return (++i, divs);
+		return (--i, divs);
 	else if (i == e)
 		return (end);
 	else
 		return (end);
 }
 
-void	set_leave(Expr *current, Iter &iter, branches b) {
-	Node	*node;
-	bool	error;
+// void	set_leave(Expr *current, Iter &iter, branches b) {
+// 	Node	*node;
+// 	bool	error;
 
-	node = new Leave(b, itoa(*iter.it, error));
-	std::cout << "LEave dentro, el valor es: " << node->get_value() << std::endl;
-	current->set_child(node, b);
-	pop(iter.it, iter.end);
-}
+// 	node = new Leave(b, itoa(*iter.it, error));
+// 	current->set_child(node, b);
+// 	pop(iter.it, iter.end);
+// }
 
 int	itoa(std::string str, bool &fail) {
 	int num;

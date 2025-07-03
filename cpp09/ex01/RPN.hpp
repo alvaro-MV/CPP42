@@ -29,11 +29,10 @@ typedef std::vector<std::string> tokens;
 struct Iter
 {
 	tokens::iterator	it;
-	tokens::iterator	end;
-	public:
-	Iter(tokens::iterator it, tokens::iterator end): 
+	tokens::iterator	begin;
+	Iter(tokens::iterator it, tokens::iterator begin): 
 													it(it),
-													end(end) {};
+													begin(begin) {};
 };
 
 class Node
