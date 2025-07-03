@@ -43,43 +43,51 @@ class Node
 	
 	public:
 		virtual int	get_value() = 0;
+		// int			get_branch();
+		virtual 	~Node() {
+
+		};
 };
 
 class Expr: public Node
 {
 	private:
-		branches	branch;
 		ops			op;
 		Node		*left;
 		Node		*right;
+		branches	branch;
 	
 	public:
 		Expr() {
+			branch = root;
 			left = nullptr;
 			right = nullptr;
 		}
-		Expr(branches branch): branch(branch) {
+		Expr(branches branch) {
+			this->branch = branch;
 			left = nullptr;
 			right = nullptr;
 		}
 		Expr(const Expr& ex) {
-			this->branch = branch;
+			this->branch = ex.branch;
 			this->left = ex.left;
 			this->right = ex.right;
 		}
 		Expr &operator=(const Expr& ex) {
-			this->branch = branch;
+			this->branch = ex.branch;
 			this->left = ex.left;
 			this->right = ex.right;
 			return (*this);
 		}
 		~Expr() {
-			delete left;
-			delete right;
+
 		}
 		// El resto
 		int		get_value(void);
+		Node	*get_child(branches branch);
 		void	set_child(Node *child, branches branch);
+		void	set_op(ops op);
+		branches		get_branch();
 };
 
 class Leave: public Node
@@ -87,17 +95,28 @@ class Leave: public Node
 	private:
 		branches	branch;
 		int			value;
-	
+		
 	public:
 		Leave(branches branch, int value): branch(branch), value(value) {}
-		int		get_value();
+
+		Leave(const Leave& l) {
+			branch = l.branch;
+			value = l.value;
+		}
+		Leave& operator=(const Leave& l) {
+			branch = l.branch;
+			value = l.value;
+			return (*this);
+		}
+		int			get_value();
+		branches	get_branch();
 };
 
 
 look_obj	lookahead(tokens::iterator i, tokens::iterator e, int dist);
-int			pop(tokens::iterator &i, tokens::iterator e, int dist);
+int			pop(tokens::iterator &i, tokens::iterator e);
 int			itoa(std::string str, bool &fail);
-void		set_leave(Expr &current, Iter &iter, branches branch);
+void		set_leave(Expr *current, Iter &iter, branches b);
 
 
 #endif

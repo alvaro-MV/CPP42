@@ -15,6 +15,28 @@ tokens	get_tokens(std::string line) {
 	return (toks);
 }
 
+void	create_block(Expr *current, Iter &iter, int dist) {
+	Expr	*right_child;
+
+	if (lookahead(iter.it, iter.end, dist) == NUM) {
+		if (dist > 1)
+			set_leave(current, iter, left);
+		right_child = new Expr(right);
+		std::cout << "el valor de la branch en right child: " << current->get_branch() << std::endl;
+		current->set_child(right_child, right);
+		std::cout << "el valor de la branch: " << current->get_branch() << std::endl;
+		create_block(right_child, iter, 2);
+		current->set_op((ops) pop(iter.it, iter.end));
+	}
+	else if (lookahead(iter.it, iter.end, dist) == OP) {
+		if (dist > 1)
+			set_leave(current, iter, left);
+		set_leave(current, iter, right);
+		current->set_op((ops) pop(iter.it, iter.end));
+		std::cout << "current value right: " << current->get_child(right)->get_value() << std::endl;
+	}
+}
+
 int main(int argc, char **argv)
 {
 	if (argc != 2) {
@@ -23,35 +45,36 @@ int main(int argc, char **argv)
 		return (1);
 	}
 	bool				error;
-	int					depth = root;
-	// std::list<Node>		RPN_AST;
-	Expr				current;
-	Expr				tmp;
+	Expr				*AST = new Expr(root);
+	std::cout << "Pero cual es el puto valor de la branch dentro del AST, niñoooo??? " <<  AST->get_branch() << std::endl;
 	tokens				toks = get_tokens(argv[1]);
-	tokens::iterator	it = toks.begin();
-	tokens::iterator	end = toks.end();
-	Iter				iter(it, end);
+	Iter				iter(toks.begin(), toks.end());
 
-	if (lookahead(it, end, 1) == END)
+	if (lookahead(iter.it, iter.end, 1) == END)
+	{
+		std::cout << 0 << std::endl;
 		return (0);
-	else if (lookahead(it, end, 2) == END)
-		return (Leave(root, itoa(*it, error)).get_value());
-
-	while (lookahead(it, end, 1) != END) {
-		if (depth == right)
-			//tmp sirve aqui para generar uno por encima del anterior.
-		current = Expr(root);
-		if (lookahead(it, end, 2) == NUM) {
-			// node = new Leave(left, itoa(*it, error));
-			// current.set_child(node, left);
-			// pop(it, end, 1);
-			set_leave(current, iter, left);
-			// Aqui logica recursiva.
-			depth = right;
-		}
-		else if (lookahead(it, end, 2) == OP) {
-			set_leave(current, iter, left);
-			set_leave(current, iter, right);
-		}
 	}
+	else if (lookahead(iter.it, iter.end, 2) == END) {
+		std::cout << Leave(root, itoa(*iter.it, error)).get_value() << std::endl;
+		return (0);
+	}
+	else {
+
+		while (lookahead(iter.it, iter.end, 1) != END) {
+			static int nodes_traversed = 0;
+			if (nodes_traversed > 0)
+			{
+				Expr	*tmp = new Expr(root);
+				tmp->set_child(AST, left);
+				create_block(tmp, iter, 1);
+				AST = tmp;
+			}
+			else
+				create_block(AST, iter, 2);
+			nodes_traversed++;
+		}
+		std::cout << AST->get_value() << std::endl;
+	}
+
 }
