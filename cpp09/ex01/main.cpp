@@ -44,6 +44,14 @@ bool	is_op(std::string s) {
 		return (false);
 }
 
+bool	is_valid_input(tokens tok) {
+	for (size_t i = 0; i < tok.size() - 1; i++) {
+		if (!is_number(tok[i]) && !is_op(tok[i]))
+			return (false);
+	}
+	return (true);
+}
+
 int	RPN_calc(tokens::iterator &it, tokens::iterator begin, tokens::iterator end) {
 	int	contador = 0;
 	bool	fail;
@@ -103,6 +111,11 @@ int	main(int argc, char **argv) {
 		return (1);
 	}
 	tokens				toks = get_tokens(remove_extra_spaces(argv[1]));
+	if (!is_valid_input(toks))
+	{
+		std::cerr << "Error" << std::endl;
+		return (1);
+	}
 	tokens::iterator end = toks.end();
 	std::cout << RPN_calc(end, toks.begin(), toks.end()) << std::endl;
 }

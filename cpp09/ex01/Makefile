@@ -1,5 +1,5 @@
 CXX:=c++
-CXXFLAGS:=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS:=-Wall -Wextra -Werror -g -std=c++98
 NAME:=RPN
 SRCS:=main.cpp RPN.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
