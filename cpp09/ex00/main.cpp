@@ -51,9 +51,14 @@ int	main(void) {
 	database::iterator it = input.begin();
 
 	while (it != input.end()) {
+		if (!verifyDate(it->first) || !verifyValue(it->second))
+		{
+			it++;
+			continue ;
+		}
 		database::iterator rata = db.find(it->first);
 		if (rata == db.end())
-			rata = find_nearest_date(db, it->first);
+			rata = findNearestDate(db, it->first);
 		std::cout << "fecha escogida: " << rata->first << " " << it->first << " => " << it->second;
 		std::cout << " = " << stoff(it->second) * stoff(rata->second) << std::endl;
 		it++;

@@ -13,6 +13,11 @@ typedef std::string str;
 typedef std::multimap<str, str> database;
 
 float stoff(const std::string& str);
-database::iterator find_nearest_date(database db, str needle_date);
+int	ft_stol(const std::string& str);
+bool	verifyDate(str date);
+bool	verifyValue(str value);
+str	getElfromDate(str date, int element);
+
+database::iterator findNearestDate(database db, str needle_date);
 
 #endif
