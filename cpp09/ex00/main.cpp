@@ -45,7 +45,6 @@ int	main(void) {
 
 	database db;
 	fill_db(db, "data.csv", ',', identity);
-	std::cout << "Por segunda vez de 2022-12-22: " << db.find("2022-02-26")->second << std::endl;
 
 	database input;
 	fill_db(input, "input.txt", '|', remove_extra_spaces);
@@ -53,14 +52,10 @@ int	main(void) {
 
 	while (it != input.end()) {
 		database::iterator rata = db.find(it->first);
-		// 	rata = find_nearest_date();
 		if (rata == db.end())
-			std::cout << "";
-		else
-		{
-			std::cout << it->first << " => " << it->second;
-			std::cout << " = " << stoff(it->second) * stoff(rata->second) << std::endl;
-		}
+			rata = find_nearest_date(db, it->first);
+		std::cout << "fecha escogida: " << rata->first << " " << it->first << " => " << it->second;
+		std::cout << " = " << stoff(it->second) * stoff(rata->second) << std::endl;
 		it++;
 	}
 }

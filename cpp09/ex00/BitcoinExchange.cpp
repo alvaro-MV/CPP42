@@ -25,12 +25,33 @@ float stoff(const std::string& str) {
 
 float	dateDistLex(str d1, str d2) {
 float	contador = (stoff(getElfromDate(d1, YEAR)) - stoff(getElfromDate(d2, YEAR))) * 365 \
-				   + (stoff(getElfromDate(d1, MONTH)) - stoff(getElfromDate(d2, MONTH))) * 12 \
-				   + (stoff(getElfromDate(d1, DAY)) - stoff(getElfromDate(d2, DAY))) * 30;
+				   + (stoff(getElfromDate(d1, MONTH)) - stoff(getElfromDate(d2, MONTH))) * 30 \
+				   + (stoff(getElfromDate(d1, DAY)) - stoff(getElfromDate(d2, DAY)));
 	
 	if (contador < 0)
 		contador *= -1;
 	return (contador);
+}
+
+database::iterator find_nearest_date(database db, str needle_date) {
+	database::iterator it = db.begin();
+	database::iterator end = db.end();
+	float	min = std::numeric_limits<float>::max();
+	float	dist;
+	float	prev = std::numeric_limits<float>::max();
+
+	while (it != end) {
+		dist = dateDistLex(it->first, needle_date);
+		if (prev < dist)
+			return (--it);
+		if (dist < min)
+			min = dist;
+		prev = dist;
+		it++;
+	}
+	end--;
+	end--;
+	return (end);
 }
 
 // int	main(void) {
