@@ -4,10 +4,12 @@
 # include <fstream>
 # include <sstream>
 # include <iostream>
+# include <ios>
 # include <string>
-#include <string>
+# include <string>
 # include <map>
-#include <limits>
+# include <limits>
+# include <stdlib.h>
 
 typedef std::string str;
 typedef std::multimap<str, str> database;

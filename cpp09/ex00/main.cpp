@@ -23,6 +23,11 @@ void	fill_db(database &db, const char *file, char del, str (*transform)(const st
 	std::fstream fin;
 	fin.open(file, std::ios::in);
 	
+	if (!fin.is_open()) {
+        std::cerr << "Error: could not open file " << std::endl;
+		exit(1);
+    }
+
 	std::getline(fin, row);
 	while (std::getline(fin, row)) {
 		str _exchange;
@@ -39,15 +44,21 @@ void	fill_db(database &db, const char *file, char del, str (*transform)(const st
 
 		db.insert(std::pair<str, str>(date, value));
 	}
+	fin.close();
 }
 
-int	main(void) {
+int	main(int argc, char **argv) {
 
+	if (argc != 2)
+	{
+		std::cerr << "./btc <file>" << std::endl;
+		return (1);
+	}
 	database db;
 	fill_db(db, "data.csv", ',', identity);
 
 	database input;
-	fill_db(input, "input.txt", '|', remove_extra_spaces);
+	fill_db(input, argv[1], '|', remove_extra_spaces);
 	database::iterator it = input.begin();
 
 	while (it != input.end()) {
