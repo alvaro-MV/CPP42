@@ -2,7 +2,12 @@
 # define PMERGEME_H
 
 # include <list>
+#include <iostream>
 #include <cstdlib>
+#include <string>
+#include <cmath>
+#include <iomanip>
+#include <vector>
 
 struct binding
 {
