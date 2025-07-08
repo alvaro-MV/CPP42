@@ -69,45 +69,55 @@ listBin splitMainChain(listBin& lb, std::map<uint32_t, uint32_t> &binding) {
             binding.insert(std::pair<uint32_t, uint32_t>(*it, *retIt));
             retIt++;
         }
-    } 
+    }
 
     for (const auto& [key, value] : binding)
-        std::cout << '[' << key << "] = " << value << "; ";
-
+    std::cout << '[' << key << "] = " << value << "; ";
+    
     for (const auto& [key, value] : binding)
-        std::cout <<  key << ", ";
+    std::cout <<  key << ", ";
     
     std::cout << std::endl;
+    
+    if (lb.size() % 2 == 0 && ret.size()) {
+        
+        listBinIter lastoflb = lb.end();
+        lastoflb--;
+        ret.insert(ret.end(), *lastoflb);
 
+        // Eliminamos el nodo menor de lb
+        it = lb.erase(lastoflb);
+    }
     return ret;
 }
 
 // MAIN
-int main() {
-    listBin lb = {38,12,1,30,14,47,26,34,11,49,17};
-	std::map<uint32_t, uint32_t> binding;
+// int main() {
+//     listBin lb = {23,5,46,26,8,12,14,43,41,11};
+// 	std::map<uint32_t, uint32_t> binding;
 
-    std::cout << "Antes del split:" << std::endl;
-    printList(lb, "lb");
+//     std::cout << "Antes del split:" << std::endl;
+//     printList(lb, "lb");
 
-    listBin b = splitMainChain(lb, binding);
+//     listBin b = splitMainChain(lb, binding);
 
-    std::cout << "\nDespués del split:" << std::endl;
-    printList(lb, "lb");
-    printList(b, "ret");
+//     std::cout << "\nDespués del split:" << std::endl;
+//     printList(lb, "lb");
+//     printList(b, "ret");
 
 
-    listBin llb = {30, 34, 38, 47, 49, 17};
-    b.clear();
-    listBinIter it = llb.begin();
-    for (int i = 0; i < (llb.size() - (llb.size() % 2 == 0) * 1); i++) {
-        b.insert(b.end(), binding[*it]);
-        it++;
-    }
-    printList(b, "ret");
+//     listBin llb = {30, 34, 38, 47, 49, 17};
 
-    return 0;
-}
+//     b.clear();
+//     listBinIter it = llb.begin();
+//     for (int i = 0; i < (llb.size() - (llb.size() % 2 == 0) * 1); i++) {
+//         b.insert(b.end(), binding[*it]);
+//         it++;
+//     }
+//     printList(b, "ret");
+
+//     return 0;
+// }
 
 
 
@@ -181,15 +191,15 @@ void    insertVec(std::vector<int> &vec,
 #include <iostream>
 #include <cstdint>
 
-void printList(std::list<int>& lst) {
-    for (const int& val : lst) {
-        std::cout << val << ", ";
-    }
-    std::cout << std::endl;
-}
+// void printList(std::list<int>& lst) {
+//     for (const int& val : lst) {
+//         std::cout << val << ", ";
+//     }
+//     std::cout << std::endl;
+// }
 
-void insertList(std::list<int>& lst,
-                std::list<int>& b,
+void insertList(std::list<uint32_t>& lst,
+                std::list<uint32_t>& b,
                 uint32_t next,
                 uint32_t prev) {
 
@@ -212,11 +222,13 @@ void insertList(std::list<int>& lst,
                 ++pos;
             }
         } else if (bval < *pos_it) {
+            int pos_tmp = pos;
             while (pos_it != lst.begin() && bval < *pos_it) {
                 --pos_it;
                 --pos;
             }
-            ++pos_it;
+            if (pos_tmp != pos)
+                ++pos_it;
         }
 
         std::cout << "inserting " << bval << " at position " << pos << std::endl;
@@ -229,27 +241,27 @@ void insertList(std::list<int>& lst,
 
 
 // int main() {
-//     std::list<int> list{3, 8, 16, 45, 555, 800};
-//     std::list<int> b{10, 34, 500, 780};
+//     listBin list = {9, 12, 14, 16, 22, 29, 31, 49};
+//     std::list<uint32_t> b{20, 21};
 
-//     uint32_t prev = 3;
-//     uint32_t next = 5;
+//     uint32_t prev = 6;
+//     uint32_t next = 11;
 //     int dummy_value = 0;
 
 //     std::cout << "Lista original:\n";
-//     printList(list);
+//     printList(list, "list");
 
 //     std::cout << "\nBuffer:\n";
-//     printList(b);
+//     printList(b, "b");
 
 //     std::cout << "\nInsertando elementos...\n";
 //     insertList(list, b, next, prev);
 
 //     std::cout << "\nLista final:\n";
-//     printList(list);
+//     printList(list, "list");
 
 //     std::cout << "\nBuffer final:\n";
-//     printList(b);
+//     printList(b, "b");
 
 //     return 0;
 // }

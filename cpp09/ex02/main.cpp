@@ -1,4 +1,4 @@
-#include <PmergeMe.hpp>
+#include "PmergeMe.hpp"
 
 /* 
 	Que necesito --> Una estructura de datos que soporte:
@@ -25,12 +25,30 @@
 	- Por lo tanto, basicamente, se trabaja construyendo el array, con dos iterador a y b, respectivamente.
 	- 
 */
-listBin	mergeInsertion(listBin rata) {
+listBin	mergeInsertion(listBin lb) {
 	std::map<uint32_t, uint32_t> binding;
-	listBin b = splitMainChain(rata, binding);
-	rata = mergeInsertion(rata);
-	// rata.decrLevelBinding();
+	listBin llb;
+
+	if (lb.size() == 1)
+		return (lb);
+    std::cout << "Antes del split:" << std::endl;
+    printList(lb, "lb");
+
+    listBin b = splitMainChain(lb, binding);
+
+    std::cout << "\nDespués del split:" << std::endl;
+    printList(lb, "lb");
+    printList(b, "ret");
 	
+	llb = mergeInsertion(lb);
+    printList(llb, "llb");
+    listBinIter it = llb.begin();
+    listBinIter bit = b.begin();
+    for (int i = 0; i < (llb.size() - (llb.size() % 2 == 0) * 1); i++) {
+        *bit = binding[*it];
+        it++;
+    }
+
 	unsigned int prevMainChain = 0;
 	unsigned int k = 1;
 	while (!b.empty()) {
@@ -38,11 +56,21 @@ listBin	mergeInsertion(listBin rata) {
 		unsigned int tOld = tSub(k - 1);
 		unsigned int nextMainChain = tNew + tOld;
 		
-		binaryInsert(rata, b, nextMainChain, prevMainChain, tNew - tOld);
+		insertList(llb, b, nextMainChain, prevMainChain);
+    	printList(b, "b dentro de el bucle de los t");
 		prevMainChain = nextMainChain + 1;
 		k++;
 	}
-	return (rata);
+	return (llb);
+}
+
+int main() {
+    listBin lb = {26,12,19};
+	
+	listBin llb = mergeInsertion(lb);
+    printList(llb, "llb");
+
+    return 0;
 }
 
 unsigned int	tSub(unsigned int k) {
