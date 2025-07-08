@@ -3,11 +3,13 @@
 
 void printList(const listBin& lb, const std::string& name) {
     std::cout << name << ": ";
+    int i = 0;
     for (const auto& binding : lb) {
         std::cout << "(" << binding << ") ";
+        i++;
+        if (i % 2 == 0)
+            std::cout << "| ";
     }
-
-
     std::cout << std::endl;
 }
 
@@ -136,7 +138,8 @@ void insertList(std::list<uint32_t>& lst,
         std::advance(pos_it, mid);
 
         if (bval > *pos_it) {
-            while (pos_it != lst.end() && pos < (int)next - 1 && bval > *pos_it) {
+            while (pos_it != lst.end() && pos < (int)next && bval > *pos_it) {
+                std::cout << "pos_it: " << *pos_it << " pos: " << pos << " next - 1 " << next - 1 << " bval " << bval << std::endl; 
                 ++pos_it;
                 ++pos;
             }
@@ -146,7 +149,7 @@ void insertList(std::list<uint32_t>& lst,
                 --pos_it;
                 --pos;
             }
-            if (bval > *lst.begin())
+            if (bval > *lst.begin() && pos_it == lst.begin())
                 ++pos_it;
         }
 

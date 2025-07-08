@@ -8,6 +8,7 @@
 #include <map>
 #include <cmath>
 #include <iomanip>
+#include <random>
 #include <vector>
 
 typedef std::list<uint32_t> listBin;
@@ -22,5 +23,6 @@ void insertList(std::list<uint32_t>& lst,
                 uint32_t prev);
 
 unsigned int	tSub(unsigned int k);
+static void checkSorted(const listBin& lb);
 
 #endif
