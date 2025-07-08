@@ -31,22 +31,24 @@ listBin	mergeInsertion(listBin lb) {
 
 	if (lb.size() == 1)
 		return (lb);
-    std::cout << "Antes del split:" << std::endl;
-    printList(lb, "lb");
+    // std::cout << "Antes del split:" << std::endl;
+    // printList(lb, "lb");
 
     listBin b = splitMainChain(lb, binding);
 
-    std::cout << "\nDespués del split:" << std::endl;
-    printList(lb, "lb");
-    printList(b, "ret");
+    // std::cout << "\nDespués del split:" << std::endl;
+    // printList(lb, "lb");
+    // printList(b, "ret");
 	
 	llb = mergeInsertion(lb);
     printList(llb, "llb");
     listBinIter it = llb.begin();
     listBinIter bit = b.begin();
-    for (int i = 0; i < (llb.size() - (llb.size() % 2 == 0) * 1); i++) {
+    for (int i = 0; i < llb.size(); i++) {
+		std::cout << "Cual es el valor del binding " << binding[*it] << std::endl;
         *bit = binding[*it];
-        it++;
+		it++;
+		bit++;
     }
 
 	unsigned int prevMainChain = 0;
@@ -57,7 +59,7 @@ listBin	mergeInsertion(listBin lb) {
 		unsigned int nextMainChain = tNew + tOld;
 		
 		insertList(llb, b, nextMainChain, prevMainChain);
-    	printList(b, "b dentro de el bucle de los t");
+    	// printList(b, "b dentro de el bucle de los t");
 		prevMainChain = nextMainChain + 1;
 		k++;
 	}
@@ -65,7 +67,7 @@ listBin	mergeInsertion(listBin lb) {
 }
 
 int main() {
-    listBin lb = {26,12,19};
+    listBin lb = {30,33,47,17,1,35,26,41,48,50,28};
 	
 	listBin llb = mergeInsertion(lb);
     printList(llb, "llb");

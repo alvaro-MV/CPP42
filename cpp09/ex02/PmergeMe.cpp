@@ -79,7 +79,7 @@ listBin splitMainChain(listBin& lb, std::map<uint32_t, uint32_t> &binding) {
     
     std::cout << std::endl;
     
-    if (lb.size() % 2 == 0 && ret.size()) {
+    if (lb.size() != ret.size()) {
         
         listBinIter lastoflb = lb.end();
         lastoflb--;
@@ -227,7 +227,7 @@ void insertList(std::list<uint32_t>& lst,
                 --pos_it;
                 --pos;
             }
-            if (pos_tmp != pos)
+            if (bval > *lst.begin())
                 ++pos_it;
         }
 
