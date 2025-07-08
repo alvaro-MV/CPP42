@@ -26,7 +26,8 @@
 	- 
 */
 listBin	mergeInsertion(listBin rata) {
-	listBin b = splitMainChain(rata);
+	std::map<uint32_t, uint32_t> binding;
+	listBin b = splitMainChain(rata, binding);
 	rata = mergeInsertion(rata);
 	// rata.decrLevelBinding();
 	
@@ -42,25 +43,6 @@ listBin	mergeInsertion(listBin rata) {
 		k++;
 	}
 	return (rata);
-}
-
-// Binary search entre prev y next -1. Siempre impares. root = ((next - prev - 1) / 2) + 1 
-// Siempre se trabaja desde el 1 hasta el nextMainChain - 1. Es decir, el binary se ejecuta sobre {1, next - 1}	
-void	binaryInsert(listBin main, listBin b, 
-					 u_int32_t next, u_int32_t prev,
-					 u_int32_t n)
-{
-	unsigned int pos = (next - 1) / 2;
-	listBinIter bit = b.begin();
-	listBinIter prev_bit;
-
-	for (size_t i = 0; i < n && i < b.size(); i++)
-		bit++;
-	while (!b.empty() && n--) {
-		prev_bit = bit;
-		prev_bit--;
-		if ()
-	}
 }
 
 unsigned int	tSub(unsigned int k) {
