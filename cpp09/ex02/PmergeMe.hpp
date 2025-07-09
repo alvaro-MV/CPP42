@@ -16,13 +16,14 @@ typedef std::list<uint32_t>::iterator listBinIter;
 
 
 void printList(const listBin& lb, const std::string& name);
-listBin	splitMainChain(listBin &lb, std::map<uint32_t, uint32_t> &binding);
+listBin	splitMainChain(listBin &lb);
 void insertList(std::list<uint32_t>& lst,
                 std::list<uint32_t>& b,
-                uint32_t next,
-                uint32_t prev);
+                int next,
+                int prev);
+void insertListSorted(std::list<uint32_t>& lst, std::list<uint32_t>& b);
 
-unsigned int	tSub(unsigned int k);
+int	tSub(int k);
 static void checkSorted(const listBin& lb);
 
 #endif

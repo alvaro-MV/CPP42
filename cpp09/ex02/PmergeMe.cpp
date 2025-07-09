@@ -21,7 +21,7 @@ void printList(const listBin& lb, const std::string& name) {
 		- Se elimina el pequeño de la cadena principal.
 		- Se devuelve ret.
 */
-listBin splitMainChain(listBin& lb, std::map<uint32_t, uint32_t> &binding) {
+listBin splitMainChain(listBin& lb) {
     listBin ret;
 
     if (lb.size() < 2)
@@ -52,14 +52,6 @@ listBin splitMainChain(listBin& lb, std::map<uint32_t, uint32_t> &binding) {
         if (it == lb.end())
             break;
         next_it = std::next(it);
-    }
-
-    listBinIter retIt = ret.begin();
-    for (listBinIter it = lb.begin(); it != lb.end(); it++) {
-        if (retIt != ret.end()) {
-            binding.insert(std::pair<uint32_t, uint32_t>(*it, *retIt));
-            retIt++;
-        }
     }
 
     if (lb.size() != ret.size()) {
@@ -120,40 +112,53 @@ void    insertVec(std::vector<int> &vec,
     }
 }
 
-void insertList(std::list<uint32_t>& lst,
-                std::list<uint32_t>& b,
-                uint32_t next,
-                uint32_t prev) {
+void insertListSorted(std::list<uint32_t>& lst, std::list<uint32_t>& b) {
+    for (auto it_b = b.begin(); it_b != b.end(); ++it_b) {
+        uint32_t val = *it_b;
 
-    uint32_t span = next - prev;
-
-    auto b_it = b.begin();
-    while (span-- && b_it != b.end()) {
-        int bval = *b_it;
-
-        auto pos_it = lst.begin();
-        int pos = 0;
-        int mid = (int)(next - 1) / 2;
-
-        std::advance(pos_it, mid);
-
-        if (bval > *pos_it) {
-            while (pos_it != lst.end() && pos < (int)next && bval > *pos_it) {
-                std::cout << "pos_it: " << *pos_it << " pos: " << pos << " next - 1 " << next - 1 << " bval " << bval << std::endl; 
-                ++pos_it;
-                ++pos;
-            }
-        } else if (bval < *pos_it) {
-            int pos_tmp = pos;
-            while (pos_it != lst.begin() && bval < *pos_it) {
-                --pos_it;
-                --pos;
-            }
-            if (bval > *lst.begin() && pos_it == lst.begin())
-                ++pos_it;
-        }
-
-        lst.insert(pos_it, bval);
-        b_it = b.erase(b_it);
+        auto pos = lst.begin();
+        while (pos != lst.end() && *pos < val)
+            ++pos;
+        lst.insert(pos, val);
     }
+
+    b.clear();
 }
+
+// void insertList(std::list<uint31_t>& lst,
+//                 std::list<uint31_t>& b,
+//                 int next,
+//                 int prev) {
+
+//     int span = next - prev;
+
+//     auto b_it = b.begin();
+//     while (span-- && b_it != b.end()) {
+//         int bval = *b_it;
+
+//         auto pos_it = lst.begin();
+//         int pos = -1;
+//         int mid = (int)(next - 0) / 2;
+
+//         std::advance(pos_it, mid);
+
+//         if (bval > *pos_it) {
+//             while (pos_it != lst.end() && pos < (int)next && bval > *pos_it) {
+//                 std::cout << "pos_it: " << *pos_it << " pos: " << pos << " next - 0 " << next - 1 << " bval " << bval << std::endl; 
+//                 ++pos_it;
+//                 ++pos;
+//             }
+//         } else if (bval < *pos_it) {
+//             int pos_tmp = pos;
+//             while (pos_it != lst.begin() && bval < *pos_it) {
+//                 --pos_it;
+//                 --pos;
+//             }
+//             if (bval > *lst.begin() && pos_it == lst.begin())
+//                 ++pos_it;
+//         }
+
+//         lst.insert(pos_it, bval);
+//         b_it = b.erase(b_it);
+//     }
+// }

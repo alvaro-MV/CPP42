@@ -26,37 +26,28 @@
 	- 
 */
 listBin	mergeInsertion(listBin lb) {
-	std::map<uint32_t, uint32_t> binding;
 	listBin llb;
 
 	if (lb.size() == 1)
 		return (lb);
 
-    listBin b = splitMainChain(lb, binding);
+    listBin b = splitMainChain(lb);
 
 	llb = mergeInsertion(lb);
     listBinIter it = llb.begin();
     listBinIter bit = b.begin();
-    for (int i = 0; i < llb.size(); i++) {
-        *bit = binding[*it];
-		it++;
-		bit++;
-    }
 
-	unsigned int prevMainChain = 0;
-	unsigned int k = 1;
+	int prevMainChain = 0;
+	int k = 1;
 	while (!b.empty()) {
-		unsigned int tNew = tSub(k);
-		unsigned int tOld = tSub(k - 1);
-		unsigned int nextMainChain = tNew + tOld;
+		int tNew = tSub(k);
+		int tOld = tSub(k - 1);
+		int nextMainChain = tNew + tOld;
 		
-		insertList(llb, b, nextMainChain, prevMainChain);
+		insertListSorted(llb, b);
 		prevMainChain = nextMainChain + 1;
 		k++;
 	}
-	printList(llb, "lista intermedia");
-	checkSorted(llb);
-	std::cout << std::endl;
 	return (llb);
 }
 
@@ -83,12 +74,11 @@ static void checkSorted(const listBin& lb) {
 std::list<uint32_t> generateRandomList(std::size_t count) {
     std::list<uint32_t> result;
     std::random_device rd;
-	// unsigned int rata = rd();
-	// std::cout << "rd: " << rata << std::endl;
-    // std::mt19937 gen(rata);
-    std::mt19937 gen(2515873257);
+	unsigned int rata = rd();
+	std::cout << "rd: " << rata << std::endl;
+    std::mt19937 gen(rata);
     std::uniform_int_distribution<uint32_t> dist(
-        0, 1000);
+        0, 5000);
 
     for (std::size_t i = 0; i < count; ++i)
         result.push_back(dist(gen));
@@ -96,25 +86,24 @@ std::list<uint32_t> generateRandomList(std::size_t count) {
 }
 
 int main() {
-    listBin lb = generateRandomList(124);	
-	printList(lb, "lb");
+    listBin lb = generateRandomList(3524);	
 	std::cout << std::endl << std::endl;
 	listBin llb = mergeInsertion(lb);
 	
-    printList(llb, "llb");
+	printList(llb, "llb");
 	checkSorted(llb);
 
     return 0;
 }
 
-unsigned int	tSub(unsigned int k) {
-	unsigned twoMultiple = 1;
-	unsigned signMultiple = 1;
+int	tSub(int k) {
+	int twoMultiple = 1;
+	int signMultiple = 1;
 
 	for (int i = 0; i < k + 1; i++) {
 		twoMultiple *= 2;
 		signMultiple *= -1;
 	}
-	signMultiple / -1;
+	signMultiple *= -1;
 	return ((twoMultiple + signMultiple) /3);
 }
