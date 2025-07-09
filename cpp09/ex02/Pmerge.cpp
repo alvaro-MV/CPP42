@@ -40,9 +40,6 @@ std::deque<uint32_t> splitMainChainDeq(std::deque<uint32_t>& input, std::deque<u
     return b_list;
 }
 
-
-
-using namespace std;
 #include <iostream>
 #include <vector>
 #include <cmath>

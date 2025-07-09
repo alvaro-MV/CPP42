@@ -35,9 +35,11 @@ static void checkSorted(const std::deque<uint32_t>& dq) {
 }
 
 void printDeque(const std::deque<uint32_t>& dq, const std::string& label) {
-    std::cout << label << ": ";
-    for (size_t i = 0; i < dq.size(); ++i)
+    std::cout << label << ":\t";
+    for (size_t i = 0; i < 6; ++i)
         std::cout << dq[i] << " ";
+    if (dq.size() > 6)
+        std::cout << "[..]";
     std::cout << "\n";
 }
 
@@ -57,12 +59,18 @@ std::deque<uint32_t> generateRandomList(std::size_t count) {
 
 int main() {
     std::deque<uint32_t> input = generateRandomList(3000);
-    printDeque(input, "Input");
+    printDeque(input, "Before");
 
+    clock_t start = clock();
     std::deque<uint32_t> sorted = mergeInsertionDeq(input);
+    clock_t end = clock();
+    double duration = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+    duration *= 1000;
 
-    printDeque(sorted, "Sorted");
+    printDeque(sorted, "After");
     checkSorted(sorted);
+
+    std::cout << "Tiempo de ejecución: " << duration << " ms" << std::endl;
 
     return 0;
 }
