@@ -41,6 +41,11 @@ bool	verifyValue(str value) {
 	bool	state = true;
 	int		only_integer = 1;
 
+	if (value.empty())
+	{
+		std::cerr << "Error: empty value" << std::endl;
+		state = false;
+	}
 	if (value.length() > 10 || (value.length() == 11 && value[0] != '-')) {
 		std::cerr << "Error: not a positive number" << std::endl;
 		return (false);
@@ -56,7 +61,10 @@ bool	verifyValue(str value) {
 		it++;
 	}
 	if (it != value.end())
+	{
+		std::cerr << "Error: '" << value << "' not numeric argument" << std::endl;
 		state = false;
+	}
 
 	double dobValue = stoff(value);
 	if (dobValue > 1000)
@@ -103,25 +111,18 @@ float	dateDistLex(str d1, str d2) {
 				   + (stoff(getElfromDate(d1, MONTH)) - stoff(getElfromDate(d2, MONTH))) * 30 \
 				   + (stoff(getElfromDate(d1, DAY)) - stoff(getElfromDate(d2, DAY)));
 	
-	if (contador < 0)
-		contador *= -1;
 	return (contador);
 }
 
 database::iterator findNearestDate(database db, str needle_date) {
 	database::iterator it = db.begin();
 	database::iterator end = db.end();
-	float	min = std::numeric_limits<float>::max();
 	float	dist;
-	float	prev = std::numeric_limits<float>::max();
 
 	while (it != end) {
 		dist = dateDistLex(it->first, needle_date);
-		if (prev < dist)
+		if (dist > 0)
 			return (--it);
-		if (dist < min)
-			min = dist;
-		prev = dist;
 		it++;
 	}
 	end--;

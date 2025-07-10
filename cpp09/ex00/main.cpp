@@ -55,7 +55,7 @@ int	main(int argc, char **argv) {
 		return (1);
 	}
 	database db;
-	fill_db(db, "btc_with_atr.csv", ',', identity);
+	fill_db(db, "data.csv", ',', identity);
 
 	database input;
 	fill_db(input, argv[1], '|', remove_extra_spaces);
