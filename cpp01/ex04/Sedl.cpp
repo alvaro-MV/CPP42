@@ -40,6 +40,12 @@ void Sedl::replace_filename() {
 	std::string	replaced_line;
 	std::ifstream inputFile(this->_filename.c_str());
 
+	if (!inputFile.is_open()) {
+		std::cout << this->_filename << ": no such file or directory or not sufficient permission." << std::endl;
+		return ;
+	}
+	
+
 	std::string file_replaced_name = this->_filename + ".replaced";
 	std::fstream file_replaced(file_replaced_name.c_str(),
 	std::ios::out | std::ios::in | std::ios::trunc);

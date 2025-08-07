@@ -9,7 +9,6 @@ class Harl
 	public:
 
 		Harl();
-		Harl(const Harl& harl);
 		Harl &operator=(const Harl& harl);
 		~Harl();
 		void complain(std::string level);
@@ -20,6 +19,7 @@ class Harl
 		void warning(void);
 		void error(void);
 
+		int printLevel(int i);
 		std::string	names[4];
 		void (Harl::*levels[4])(void);
 ;

@@ -12,11 +12,7 @@ class HumanB {
 	public:
 		HumanB(std::string name): name(name), w(NULL) {};
 		HumanB(const HumanB &b): name(b.name), w(b.w) {};
-		HumanB &operator=(const HumanB& b) {
-			this->name = b.name;
-			this->w = b.w;
-			return (*this);
-		};
+		HumanB &operator=(const HumanB& b);
 		~HumanB();
 
 		void attack();

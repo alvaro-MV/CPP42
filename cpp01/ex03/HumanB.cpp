@@ -9,6 +9,12 @@ HumanB::~HumanB() {
 	
 }
 
+HumanB &HumanB::operator=(const HumanB& a) {
+	this->name = a.name;
+	this->w = a.w;
+	return (*this);
+}
+
 void HumanB::attack()
 {
 	std::cout << this->name 

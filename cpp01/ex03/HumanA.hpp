@@ -12,11 +12,7 @@ class HumanA {
 	public:
 		HumanA(std::string name, Weapon &w): name(name), w(w) {};
 		HumanA(const HumanA &a): name(a.name), w(a.w) {};
-		HumanA &operator=(const HumanA& a) {
-			this->name = a.name;
-			this->w = a.w;
-			return (*this);
-		};
+		HumanA &operator=(const HumanA& a);
 		~HumanA();
 		void attack();
 };

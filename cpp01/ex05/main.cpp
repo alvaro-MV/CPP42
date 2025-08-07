@@ -6,5 +6,7 @@ int	main(void)
 
 	harl.complain("ERROR");
 	harl.complain("DEBUG");
+	harl.complain("INFO");
+	harl.complain("WARNING");
 	harl.complain("Random");
 }
