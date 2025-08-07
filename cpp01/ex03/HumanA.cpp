@@ -1,5 +1,9 @@
 #include "HumanA.hpp"
 
+HumanA::~HumanA() {
+	
+}
+
 void HumanA::attack()
 {
 	std::cout << this->name 

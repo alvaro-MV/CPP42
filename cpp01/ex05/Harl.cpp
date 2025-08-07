@@ -6,10 +6,10 @@ Harl::Harl() {
 	this->levels[1] = &Harl::info;
 	this->levels[2] = &Harl::warning;
 	this->levels[3] = &Harl::error;
-}
-
-Harl::Harl(const Harl& harl) {
-	
+	names[0] = "DEBUG";
+	names[1] = "INFO",
+	names[2] = "WARNING",
+	names[3] = "ERROR";
 }
 
 Harl& Harl::operator=(const Harl& harl) {
@@ -47,7 +47,7 @@ void Harl::error(void) {
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 }
 
-void Harl::announce(std::string level) {
+void Harl::complain(std::string level) {
 
 	int i = 0;
 
@@ -56,6 +56,7 @@ void Harl::announce(std::string level) {
 		if (!this->names[i].compare(level))
 		{
 			(this->*levels[i])();
+			break;
 		}
 		i++;
 	}

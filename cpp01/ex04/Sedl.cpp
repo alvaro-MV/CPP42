@@ -16,7 +16,7 @@ std::string Sedl::replace_1_line(std::string line) {
 	std::size_t	prev_idx = 0;
 	std::string	ret_str = "";
 	
-	while (idx_str != -1)
+	while (idx_str != std::string::npos)
 	{
 		idx_str = line.find(_s1, idx_str);
 		if (idx_str > 0)
@@ -25,7 +25,7 @@ std::string Sedl::replace_1_line(std::string line) {
 				ret_str += _s2;
 			ret_str += line.substr(prev_idx, idx_str - prev_idx);
 		}
-		if (idx_str != -1)
+		if (idx_str != std::string::npos)
 		{
 			idx_str += _s1.length();
 			prev_idx = idx_str;
@@ -38,12 +38,13 @@ std::string Sedl::replace_1_line(std::string line) {
 void Sedl::replace_filename() {
 	std::string	line;
 	std::string	replaced_line;
-	std::ifstream inputFile(this->_filename);
+	std::ifstream inputFile(this->_filename.c_str());
 
-	std::fstream file_replaced(this->_filename + ".replaced", 
+	std::string file_replaced_name = this->_filename + ".replaced";
+	std::fstream file_replaced(file_replaced_name.c_str(),
 	std::ios::out | std::ios::in | std::ios::trunc);
 
-	while (getline(inputFile, line))
+	while (std::getline(inputFile, line))
 	{
 		replaced_line = replace_1_line(line);
 		file_replaced << replaced_line << std::endl;

@@ -15,7 +15,7 @@ class Weapon {
 			this->type = w.type;
 			return (*this);
 		};
-		~Weapon() = default;
+		~Weapon();
 
 		const std::string &getType();
 		void setType(std::string type);

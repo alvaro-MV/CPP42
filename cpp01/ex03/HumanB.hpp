@@ -10,14 +10,14 @@ class HumanB {
 	Weapon*		w;
 
 	public:
-		HumanB(std::string name): name(name), w(nullptr) {};
-		HumanB(const HumanB &b): name(name), w(b.w) {};
+		HumanB(std::string name): name(name), w(NULL) {};
+		HumanB(const HumanB &b): name(b.name), w(b.w) {};
 		HumanB &operator=(const HumanB& b) {
 			this->name = b.name;
 			this->w = b.w;
 			return (*this);
 		};
-		~HumanB() = default;
+		~HumanB();
 
 		void attack();
 		void setWeapon(Weapon &w);

@@ -13,15 +13,3 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-
-/* 
-
-	- Método replace
-
-	- Método para abrir el archivo.
-
-	- Método para leerlo
-
-	- Método para escribir en el archivo.replace
-
- */

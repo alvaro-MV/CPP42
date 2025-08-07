@@ -12,7 +12,7 @@ class Harl
 		Harl(const Harl& harl);
 		Harl &operator=(const Harl& harl);
 		~Harl();
-		void announce(std::string level);
+		void complain(std::string level);
 
 	private:
 		void debug(void);
@@ -20,7 +20,7 @@ class Harl
 		void warning(void);
 		void error(void);
 
-		std::string	names[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+		std::string	names[4];
 		void (Harl::*levels[4])(void);
 ;
 };

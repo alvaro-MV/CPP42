@@ -10,8 +10,6 @@ std::deque<uint32_t> mergeInsertionDeq(std::deque<uint32_t>& input) {
     splitMainChainDeq(input, main_chain, b_list);
 
     main_chain = mergeInsertionDeq(main_chain);
-
-    // Insertar los b_i uno a uno en orden
     insertDequeSorted(main_chain, b_list);
 
     return main_chain;

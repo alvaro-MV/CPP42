@@ -5,6 +5,10 @@ void HumanB::setWeapon(Weapon &w)
 	this->w = &w;
 }
 
+HumanB::~HumanB() {
+	
+}
+
 void HumanB::attack()
 {
 	std::cout << this->name 

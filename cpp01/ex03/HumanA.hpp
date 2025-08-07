@@ -17,7 +17,7 @@ class HumanA {
 			this->w = a.w;
 			return (*this);
 		};
-		~HumanA() = default;
+		~HumanA();
 		void attack();
 };
 

@@ -1,7 +1,7 @@
 #include "Zombie.hpp"
 
 Zombie::Zombie() {
-
+    this->name = "";
 }
 
 Zombie::Zombie(std::string name) {
@@ -12,6 +12,7 @@ Zombie &Zombie::operator=(const Zombie &z) {
 	this->name = z.name;
 	return (*this);
 }
+
 Zombie::~Zombie() {
 	std::cout << this->name << " DEAD" << std::endl;
 }
