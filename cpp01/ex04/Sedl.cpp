@@ -40,6 +40,11 @@ void Sedl::replace_filename() {
 	std::string	replaced_line;
 	std::ifstream inputFile(this->_filename.c_str());
 
+	if (this->_s1.empty() || this->_s2.empty()) {
+		std::cout << "Error: s1 and s2 cannot be empty." << std::endl;
+		return ;
+	}
+
 	if (!inputFile.is_open()) {
 		std::cout << this->_filename << ": no such file or directory or not sufficient permission." << std::endl;
 		return ;

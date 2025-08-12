@@ -17,6 +17,12 @@ HumanB &HumanB::operator=(const HumanB& a) {
 
 void HumanB::attack()
 {
+	if (this->w == NULL) {
+		std::cout << this->name 
+		<< " has no weapon to attack with!" 
+		<< std::endl;
+		return;
+	}
 	std::cout << this->name 
 	<< "  attacks with their " 
 	<< this->w->getType() << std::endl;
