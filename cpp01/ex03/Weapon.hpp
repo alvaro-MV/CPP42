@@ -10,11 +10,7 @@ class Weapon {
 		Weapon();
 		Weapon(std::string type_input): type(type_input) {};
 		Weapon(const Weapon &w): type(w.type) {};
-		const Weapon &operator=(const Weapon &w) {
-			if (this != &w)
-			this->type = w.type;
-			return (*this);
-		};
+		const Weapon &operator=(const Weapon &w);
 		~Weapon();
 
 		const std::string &getType();
