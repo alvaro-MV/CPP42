@@ -10,8 +10,8 @@ class HumanB {
 	Weapon*		w;
 
 	public:
-		HumanB(std::string name): name(name), w(NULL) {};
-		HumanB(const HumanB &b): name(b.name), w(b.w) {};
+		HumanB(std::string name);
+		HumanB(const HumanB &b);
 		HumanB &operator=(const HumanB& b);
 		~HumanB();
 

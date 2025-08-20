@@ -68,11 +68,6 @@ void Harl::complain(std::string level) {
 	while (i < 4)
 	{
 		(this->names[i].compare(level) == 0) && this->printLevel(i);
-		// if (!this->names[i].compare(level))
-		// {
-		// 	(this->*levels[i])();
-		// 	break;
-		// }
 		i++;
 	}
 }

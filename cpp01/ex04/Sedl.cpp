@@ -1,5 +1,18 @@
 #include "Sedl.hpp"
 
+Sedl::Sedl(std::string filename, 
+	std::string s1, 
+	std::string s2):
+	_filename(filename),
+	_s1(s1),
+	_s2(s2) {};
+
+Sedl::Sedl(const Sedl& sedl):
+	_s1(sedl._s1),
+	_s2(sedl._s2) {};
+
+
+
 Sedl::~Sedl() {
 	//Por ver
 };
@@ -55,9 +68,14 @@ void Sedl::replace_filename() {
 	std::fstream file_replaced(file_replaced_name.c_str(),
 	std::ios::out | std::ios::in | std::ios::trunc);
 
-	while (std::getline(inputFile, line))
-	{
-		replaced_line = replace_1_line(line);
-		file_replaced << replaced_line << std::endl;
+	for (char ch; inputFile.get(ch); ) {
+		line = line + ch;
+		if (ch == '\n') {
+			replaced_line = replace_1_line(line);
+			file_replaced << replaced_line;
+			line.clear();
+		}
 	}
+	replaced_line = replace_1_line(line);
+	file_replaced << replaced_line;
 }

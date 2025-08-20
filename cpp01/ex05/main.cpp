@@ -8,5 +8,5 @@ int	main(void)
 	harl.complain("DEBUG");
 	harl.complain("INFO");
 	harl.complain("WARNING");
-	harl.complain("Random");
+	harl.complain("");
 }

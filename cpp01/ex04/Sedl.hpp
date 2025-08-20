@@ -16,14 +16,9 @@ public:
 	//Constructors
 	Sedl(std::string filename, 
 		std::string s1, 
-		std::string s2):
-		_filename(filename),
-		_s1(s1),
-		_s2(s2) {};
+		std::string s2);
 
-	Sedl(const Sedl& sedl):
-		_s1(sedl._s1),
-		_s2(sedl._s2) {};
+	Sedl(const Sedl& sedl);
 
 	Sedl &operator=(const Sedl &sedl);
 	~Sedl();

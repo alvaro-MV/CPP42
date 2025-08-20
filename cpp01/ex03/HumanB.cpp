@@ -1,5 +1,10 @@
 #include "HumanB.hpp"
 
+
+HumanB::HumanB(std::string name): name(name), w(NULL) {};
+
+HumanB::HumanB(const HumanB &b): name(b.name), w(b.w) {};
+
 void HumanB::setWeapon(Weapon &w)
 {
 	this->w = &w;

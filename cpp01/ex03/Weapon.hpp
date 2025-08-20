@@ -8,8 +8,8 @@ class Weapon {
 
 	public:
 		Weapon();
-		Weapon(std::string type_input): type(type_input) {};
-		Weapon(const Weapon &w): type(w.type) {};
+		Weapon(std::string type_input);
+		Weapon(const Weapon &w);
 		const Weapon &operator=(const Weapon &w);
 		~Weapon();
 
