@@ -1,6 +1,6 @@
 CXX:=c++
 CXXFLAGS:=-Wall -Wextra -Werror -std=c++98
-NAME:=my_sed
+NAME:=harl
 SRCS:= main.cpp Harl.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 

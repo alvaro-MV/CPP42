@@ -13,7 +13,7 @@ const std::string &Weapon::getType() {
 }
 
 Weapon::~Weapon() {
-
+	std::cout << "Weapon destructor called" << std::endl;
 }
 
 void Weapon::setType(std::string type) {
