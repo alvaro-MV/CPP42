@@ -1,5 +1,9 @@
 #include "Fixed.hpp"
 
+Fixed::Fixed(void): value(0) {
+	std::cout << "Default constructor called" << std::endl;
+};
+
 Fixed::Fixed(Fixed &n_fixed) {
 	this->value = n_fixed.value;	
 	std::cout << "Copy constructor called" << std::endl;

@@ -9,9 +9,7 @@ class Fixed {
 		static const int fract = 8;
 	
 	public:
-		Fixed() : value(0) {
-			std::cout << "Default constructor called" << std::endl;
-		};
+		Fixed();
 		Fixed(Fixed &n_fixed);
 		Fixed &operator=(Fixed &n_fixed);
 		~Fixed();
