@@ -93,7 +93,7 @@ Fixed Fixed::operator-(const Fixed &n_fixed) {
 
 Fixed Fixed::operator*(const Fixed &n_fixed) {
 	Fixed result;
-	value = this->getRawBits() *n_fixed.getRawBits();
+	value = this->getRawBits() * n_fixed.getRawBits();
 	value /= (1 << this->getFract());
 	result.setRawBits(value);
 	return (result);

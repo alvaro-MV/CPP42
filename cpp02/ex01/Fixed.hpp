@@ -19,7 +19,7 @@ class Fixed {
 		Fixed(const Fixed &n_fixed);
 		Fixed(Fixed &n_fixed);
 		Fixed &operator=(Fixed &n_fixed);
-		Fixed &operator=(Fixed n_fixed);
+		//Fixed &operator=(Fixed n_fixed);
 		~Fixed();
 
 		int getRawBits(void) const;
