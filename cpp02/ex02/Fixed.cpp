@@ -1,5 +1,9 @@
 #include "Fixed.hpp"
 
+Fixed::Fixed() : value(0) {
+	// std::cout << "Default constructor called" << std::endl;
+};
+
 Fixed::Fixed(const Fixed &n_fixed) {
 	this->value = n_fixed.value;	
 	// std::cout << "Copy constructor called" << std::endl;
@@ -10,13 +14,13 @@ Fixed::Fixed(Fixed &n_fixed) {
 	// std::cout << "Copy constructor called" << std::endl;
 }
 
-Fixed::Fixed(int i) {
+Fixed::Fixed(const int i) {
 	// std::cout << "Int constructor called" << std::endl;
 	this->value = i << this->getFract();
 }
 
-Fixed::Fixed(float f) {
-    this->value = static_cast<int>(roundf(f * (1 << 8)));
+Fixed::Fixed(const float f) {
+    this->value = static_cast<int>(roundf(f * (1 << getFract())));
     // std::cout << "Float constructor called" << std::endl;
 }
 

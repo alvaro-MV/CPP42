@@ -4,7 +4,7 @@
 int main( void ) {
 	Fixed const b(Fixed(-5.05f) / Fixed(2.9f));
 	Fixed dos(2.0f);
-	Fixed uno(1.0f);
+	Fixed const uno(1.0f);
 
 	std::cout << b << std::endl;
 	if (dos > Fixed(0.0f))

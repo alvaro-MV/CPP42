@@ -18,8 +18,7 @@ class Fixed {
 		Fixed(const float f);
 		Fixed(const Fixed &n_fixed);
 		Fixed(Fixed &n_fixed);
-		Fixed &operator=(Fixed &n_fixed);
-		//Fixed &operator=(Fixed n_fixed);
+		Fixed &operator=(const Fixed &n_fixed);
 		~Fixed();
 
 		int getRawBits(void) const;

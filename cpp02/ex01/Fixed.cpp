@@ -64,12 +64,7 @@ float Fixed::toFloat(void) const {
 	return (ret / (1 << this->getFract()));
 }
 
-Fixed &Fixed::operator=(Fixed &n_fixed) {
-	this->value = n_fixed.value;
-	return (*this);
-}
-
-Fixed &Fixed::operator=(Fixed n_fixed) {
+Fixed &Fixed::operator=(const Fixed &n_fixed) {
 	this->value = n_fixed.value;
 	return (*this);
 }
