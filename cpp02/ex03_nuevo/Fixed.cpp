@@ -189,9 +189,10 @@ Fixed &Fixed::min(Fixed &f1, Fixed &f2) {
 
 const Fixed &Fixed::min(const Fixed &f1, const Fixed &f2) {
 
-	Fixed	&non_const_f2 = (Fixed &) f2;
-	Fixed	&non_const_f1 = (Fixed &) f1;
-	if (non_const_f1 <= non_const_f2)
+	// Fixed	&non_const_f2 = (Fixed &) f2;
+	// Fixed	&non_const_f1 = (Fixed &) f1;
+	// if (non_const_f1 <= non_const_f2)
+	if (f1 <= f2)
 		return (f1);
 	else
 		return (f2);

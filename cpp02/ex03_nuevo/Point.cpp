@@ -7,10 +7,13 @@ Point::Point(float x, float y): x(x), y(y) {}
 Point::Point(const Point &p): x(p.x), y(p.y) {}
 
 Point &Point::operator=(const Point &p) {
+	(void) p;
 	return (*this);
 }
 
-Point::~Point() = default;
+Point::~Point() {
+	// std::cout << "Point destroyed" << std::endl;
+}
 
 Fixed const Point::getX() const {
 	return (x);

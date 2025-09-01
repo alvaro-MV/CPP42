@@ -34,16 +34,15 @@ typedef struct nodeLine {
 	private:
 		Point const a;
 		Point const b;
-		Point const &center;
 	
 	public:
 		Point const ga() {return a;};
 		Point const gb() {return b;};
-		nodeLine(Point const a, Point const b, Point const &center);
+		nodeLine(Point const a, Point const b);
 		int side(Point p);
 } nodeLine;
 
-nodeLine::nodeLine(Point const a, Point const b, Point const &center): a(a), b(b), center(center) {};
+nodeLine::nodeLine(Point const a, Point const b): a(a), b(b) {};
 
 int nodeLine::side(Point p) {
     Fixed val = (p.getX() - a.getX()) * (b.getY()  - a.getY())
@@ -87,9 +86,9 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point) {
 	//std::cout << "Comprobacion random: " << b.getX() << std::endl;
 	Point const center = baricenter(a, b, c);
 	
-	nodeLine node1(a, b, center);
-	nodeLine node2(a, c, center);
-	nodeLine node3(b, c, center);
+	nodeLine node1(a, b);
+	nodeLine node2(a, c);
+	nodeLine node3(b, c);
 
 	BSPTree bsp3 = {NULL, NULL, node3};
 	BSPTree bsp2 = {&bsp3, NULL, node2};
