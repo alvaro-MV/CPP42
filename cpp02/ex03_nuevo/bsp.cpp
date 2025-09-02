@@ -71,19 +71,12 @@ struct BSPTree {
 bool	bspTraverse(BSPTree *current, Point const &p, Point const &center) {
 	if (!current)
 		return (true);
-	//std::cout << "a: " << current->line.ga().getX();
-	//std::cout << " b: " << current->line.gb().getX() << std::endl;
-	//std::cout << "p: " << current->line.side(p) << " center: " << current->line.side(center) << std::endl;
-	//std::cout << "next: " << current->next << std::endl;
-	//std::cout << "\n ------------------------------------ \n";
-
 	if (current->line.side(p) == current->line.side(center))
 		return (bspTraverse(current->next, p, center));
 	return (false);
 }
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point) {
-	//std::cout << "Comprobacion random: " << b.getX() << std::endl;
 	Point const center = baricenter(a, b, c);
 	
 	nodeLine node1(a, b);
