@@ -95,6 +95,6 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point) {
 	BSPTree bsp1 = {&bsp2, NULL, node1};
 
 	bool valor = bspTraverse(&bsp1, point, center);
-	std::cout << "Cual cojones es el resultado: " << valor << std::endl;
+	std::cout << "Resultado: " << valor << std::endl;
 	return (valor);
 }
