@@ -20,10 +20,19 @@ AMateria::~AMateria(){
     std::cout << "El material se ha acabado, cambia de dealer" << std::endl;
 }
 
-AMateria::AMateria(AMateria &a){
+AMateria::AMateria(const AMateria &a){
     this->type = a.type;
 }
 
-AMateria &AMateria::operator=(AMateria &other){
+AMateria &AMateria::operator=(const AMateria &other){
+    this->type = other.type;
     return(*this);
+}
+
+std::string const & AMateria::getType() const {
+    return this->type;
+}
+
+void AMateria::use(ICharacter&){
+    std::cout << "* uses " << this->type << " *" << std::endl;
 }
