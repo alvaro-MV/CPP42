@@ -15,9 +15,9 @@ Fixed::Fixed(const int i) {
 	this->value = i << fract;
 }
 
-Fixed::Fixed(const float f) {
+Fixed::Fixed(const float f) {	
     std::cout << "Float constructor called" << std::endl;
-    this->value = static_cast<int>(roundf(f * (1 << 8)));
+    this->value = static_cast<int>(roundf(f * (1 << fract)));
 }
 
 

@@ -55,12 +55,15 @@ Fixed	Fixed::operator-(const Fixed &f) const {
 }
 
 Fixed	Fixed::operator*(const Fixed &f) const {
-	Fixed	ret(this->toFloat() * f.toFloat());
+	Fixed ret;
+	ret.setRawBits((getRawBits() * f.getRawBits()) >> fract);
 	return (ret);
 }
 
 Fixed	Fixed::operator/(const Fixed &f) const {
-	Fixed	ret(this->toFloat() / f.toFloat());
+
+	Fixed	ret;
+	ret.setRawBits((getRawBits() << fract) / f.getRawBits());
 	return (ret);
 }
 

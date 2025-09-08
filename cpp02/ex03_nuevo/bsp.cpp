@@ -22,9 +22,9 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point) {
 	nodeLine node2(a, c);
 	nodeLine node3(b, c);
 
-	BSPTree bsp3 = {NULL, NULL, node3};
-	BSPTree bsp2 = {&bsp3, NULL, node2};
-	BSPTree bsp1 = {&bsp2, NULL, node1};
+	BSPTree bsp3 = {NULL, node3};
+	BSPTree bsp2 = {&bsp3, node2};
+	BSPTree bsp1 = {&bsp2, node1};
 
 	bool valor = bspTraverse(&bsp1, point, center);
 	std::cout << "Resultado: " << valor << std::endl;

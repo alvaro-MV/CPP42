@@ -17,7 +17,6 @@ typedef struct nodeLine {
 
 struct BSPTree {
 	BSPTree		*next;
-	BSPTree		*other;
 	nodeLine	line;
 };
 
