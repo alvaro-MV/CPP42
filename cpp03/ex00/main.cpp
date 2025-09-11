@@ -9,5 +9,6 @@ int	main(void) {
 	ct.beRepaired(4);
 	ct.takeDamage(6);
 	ct.takeDamage(3);
+	ct.attack("otro robot");
 	ct.beRepaired(4);
 }
