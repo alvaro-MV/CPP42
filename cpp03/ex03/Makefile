@@ -1,7 +1,7 @@
 CXX:=c++
-CXXFLAGS:=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS:=-Wall -Wextra -Werror  -Wshadow -Wno-shadow -std=c++98
 NAME:=clap
-SRCS:= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SRCS:= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
 
 
