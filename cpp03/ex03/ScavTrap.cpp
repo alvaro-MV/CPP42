@@ -1,20 +1,20 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(): ClapTrap("Scav") {
+ScavTrap::ScavTrap() {
 	this->hitPoints = 100;
 	this->energyPoints = 50;
 	this->attackDamage = 20;
 	this->type_trap = "ScavTrap";
-	std::cout << "ScavTrap " << this->name 
+	std::cout << "ScavTrap default" 
           << " has entered the arena, guarding the gates!!" << std::endl;
 };
 
-ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
+ScavTrap::ScavTrap(std::string name) {
 	this->hitPoints = 100;
 	this->energyPoints = 50;
 	this->attackDamage = 20;
 	this->type_trap = "ScavTrap";
-	std::cout << "ScavTrap " << this->name 
+	std::cout << "ScavTrap " << name
           << " has entered the arena, guarding the gates!!" << std::endl;
 };
 
@@ -26,7 +26,7 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& sv) {
 	return (*this);
 }
 
-ScavTrap::ScavTrap(const ScavTrap& sv): ClapTrap(sv.name) {
+ScavTrap::ScavTrap(const ScavTrap& sv) {
 	this->energyPoints = sv.energyPoints;
 	this->hitPoints = sv.hitPoints;
 	this->attackDamage = sv.attackDamage;

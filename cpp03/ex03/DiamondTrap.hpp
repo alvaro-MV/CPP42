@@ -4,7 +4,7 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-class DiamondTrap : public ScavTrap, private FragTrap {
+class DiamondTrap : public ScavTrap, public FragTrap {
 
 	public:
 		DiamondTrap();

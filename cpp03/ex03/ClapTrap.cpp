@@ -17,10 +17,16 @@ ClapTrap::ClapTrap(std::string name): name(name),
 
 ClapTrap::ClapTrap(const ClapTrap& ct) {
 	this->name = ct.name;
+	hitPoints = ct.hitPoints;
+	energyPoints = ct.energyPoints;
+	attackDamage = ct.attackDamage;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& ct) {
 	this->name = ct.name;
+	hitPoints = ct.hitPoints;
+	energyPoints = ct.energyPoints;
+	attackDamage = ct.attackDamage;
 	return (*this);
 }
 

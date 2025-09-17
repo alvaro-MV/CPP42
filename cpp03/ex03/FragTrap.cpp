@@ -9,13 +9,17 @@ FragTrap::FragTrap(): ClapTrap("frag") {
 	std::cout << "FragTrap " << name << " is here, ready to throw grenades everywhere!!" << std::endl;
 };
 
-FragTrap::FragTrap(std::string name): ClapTrap(name) {
+FragTrap::FragTrap(std::string name) {
 	this->hitPoints = 100;
 	this->energyPoints = 100;
 	this->attackDamage = 30;
 	this->type_trap = "FragTrap";
 	std::cout << "FragTrap " << name << " is here, ready to throw grenades everywhere!!" << std::endl;
 };
+
+unsigned int FragTrap::getAttackDamage() {
+	return (attackDamage);
+}
 
 FragTrap& FragTrap::operator=(const FragTrap& sv) {
 	this->name = sv.name;

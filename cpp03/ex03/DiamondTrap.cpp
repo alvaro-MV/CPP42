@@ -2,7 +2,7 @@
 
 DiamondTrap::DiamondTrap(): ClapTrap("default_clap_name"), ScavTrap(), FragTrap()  {
     name = "default";
-    hitPoints = FragTrap::hitPoints;
+    hitPoints = 10;
     energyPoints = ScavTrap::energyPoints;
     attackDamage = FragTrap::attackDamage;
     std::cout << "DiamondTrap " << this->name
@@ -12,16 +12,16 @@ DiamondTrap::DiamondTrap(): ClapTrap("default_clap_name"), ScavTrap(), FragTrap(
 
 DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_name"),  ScavTrap(name), FragTrap(name) {
     this->name = name;
-    hitPoints = FragTrap::hitPoints;
+    hitPoints = 10;
     energyPoints = ScavTrap::energyPoints;
     attackDamage = FragTrap::attackDamage;
     std::cout << "DiamondTrap " << this->name
-          << "Second const has arrived — shining with power, guarding the gates, and ready to explode things in style! 💎🤖"
+          << ": Second const has arrived — shining with power, guarding the gates, and ready to explode things in style! 💎🤖"
           << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& st) {
-    hitPoints = st.hitPoints;
+DiamondTrap::DiamondTrap(const DiamondTrap& st): ClapTrap(st.name + "_clap_name"), ScavTrap(st.name), FragTrap(st.name) {
+    hitPoints = 10;
     energyPoints = st.energyPoints;
     attackDamage = st.attackDamage;
     std::cout << "DiamondTrap " << this->name
@@ -30,7 +30,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap& st) {
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& st) {
-    hitPoints = st.hitPoints;
+    hitPoints = 10;
     energyPoints = st.energyPoints;
     attackDamage = st.attackDamage;
     std::cout << "DiamondTrap " << this->name
@@ -40,8 +40,8 @@ DiamondTrap& DiamondTrap::operator=(const DiamondTrap& st) {
 }
 
 DiamondTrap::~DiamondTrap() {
-    std::cout << "DiamondTrap " << this->name
-          << " has arrived — shining with power, guarding the gates, and ready to explode things in style! 💎🤖"
+    std::cout << "DiamondTrap: " << this->name
+          << " my shine has expired"
           << std::endl;
 }
 
