@@ -5,16 +5,17 @@ ScavTrap::ScavTrap() {
 	this->energyPoints = 50;
 	this->attackDamage = 20;
 	this->type_trap = "ScavTrap";
-	std::cout << "ScavTrap default" 
+	std::cout << "ScavTrap " << "default" 
           << " has entered the arena, guarding the gates!!" << std::endl;
 };
 
 ScavTrap::ScavTrap(std::string name) {
+	(void) name;
 	this->hitPoints = 100;
 	this->energyPoints = 50;
 	this->attackDamage = 20;
 	this->type_trap = "ScavTrap";
-	std::cout << "ScavTrap " << name
+	std::cout << "ScavTrap " << this->name 
           << " has entered the arena, guarding the gates!!" << std::endl;
 };
 
@@ -35,6 +36,10 @@ ScavTrap::ScavTrap(const ScavTrap& sv) {
 ScavTrap::~ScavTrap() {
 
 	std::cout << "ScavTrap " << this->name << " goes to garbage." << std::endl;
+}
+
+void ScavTrap::attack(const std::string &target) {
+	std::cout << "ScavTrap " << this->name << " attack " << target  <<" guardind the Gate." << std::endl;
 }
 
 void ScavTrap::guardGate(void) {

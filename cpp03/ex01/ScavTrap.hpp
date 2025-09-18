@@ -3,7 +3,7 @@
 
 #include "ClapTrap.hpp"
 
-class ScavTrap : public ClapTrap {
+class ScavTrap : ublic ClapTrap {
 
 	public:
 		ScavTrap();
@@ -12,8 +12,7 @@ class ScavTrap : public ClapTrap {
 		ScavTrap& operator=(const ScavTrap& sv);
 		~ScavTrap();
 
-		void attack(void);
-		void attack(const std::string &target);
+		virtual void attack(const std::string &target);
 		void guardGate(void);
 		unsigned int getHitPoints();
 };

@@ -65,7 +65,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (!this->hitPoints)
 	{
-		std::cout << MAGENTA << name << "can not be repaired, has died." << std::endl;
+		std::cout << MAGENTA << name << " can not be repaired, has died." << std::endl;
 		return ;
 	}
 	std::cout << MAGENTA << "ClapTrap " 

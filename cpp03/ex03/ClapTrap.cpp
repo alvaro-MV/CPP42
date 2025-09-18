@@ -4,7 +4,7 @@ ClapTrap::ClapTrap(): name("default"),
 									  hitPoints(10),
 									  energyPoints(10),
 									  attackDamage(0) {
-	std::cout << YELLOW << "ClapTrap " << this->name << " ready for battle!!" << RESET << std::endl;
+	// std::cout << YELLOW << "ClapTrap " << this->name << " ready for battle!!" << RESET << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name): name(name), 
@@ -12,7 +12,7 @@ ClapTrap::ClapTrap(std::string name): name(name),
 				   hitPoints(10), 
 				   energyPoints(10),
 				   attackDamage(0) {
-	std::cout << "ClapTrap " << this->name << " ready for battle!!" << std::endl;
+	// std::cout << "ClapTrap " << this->name << " ready for battle!!" << std::endl;
 };
 
 ClapTrap::ClapTrap(const ClapTrap& ct) {
@@ -31,7 +31,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& ct) {
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << RED << "ClapTrap " << this->name << " leaves this world." << RESET << std::endl;
+	// std::cout << RED << "ClapTrap " << this->name << " leaves this world." << RESET << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target) {

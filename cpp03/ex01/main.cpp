@@ -1,7 +1,5 @@
 #include "ScavTrap.hpp"
 
-#include "ScavTrap.hpp"
-
 void	alice_rundown(void)
 {
 	ScavTrap alice("Alice");

@@ -1,5 +1,5 @@
 CXX:=c++
-CXXFLAGS:=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS:=-Wall -Wextra -Werror -std=c++98 -g
 NAME:=clap
 SRCS:= main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))
