@@ -20,25 +20,28 @@ DiamondTrap::DiamondTrap(std::string name): ClapTrap(name + "_clap_name"),  Scav
           << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& st): ClapTrap(st.name + "_clap_name"), ScavTrap(st.name), FragTrap(st.name) {
+DiamondTrap::DiamondTrap(const DiamondTrap& st): ClapTrap(st), ScavTrap(st), FragTrap(st) {
     name = st.name;
     hitPoints = st.hitPoints;
     energyPoints = st.energyPoints;
     attackDamage = st.attackDamage;
     std::cout << "DiamondTrap " << this->name
-          << "Copy: has arrived — shining with power, guarding the gates, and ready to explode things in style! 💎🤖"
+          << " --> Copy: has arrived — shining with power, guarding the gates, and ready to explode things in style! 💎🤖"
           << std::endl;
 }
 
 DiamondTrap& DiamondTrap::operator=(const DiamondTrap& st) {
-    name = st.name;
-    hitPoints = st.hitPoints;
-    energyPoints = st.energyPoints;
-    attackDamage = st.attackDamage;
-    std::cout << "DiamondTrap " << this->name
-          << "Assign: has arrived — shining with power, guarding the gates, and ready to explode things in style! 💎🤖"
-          << std::endl;
-    return (*this);
+    std::cout << "Pero RATTTTTTOOOOOONNNNN porque entras AQUIIOOOOIIIIII!!! " << std::endl;
+    if (this != &st) {
+        ClapTrap::operator=(st);
+        ScavTrap::operator=(st);
+        FragTrap::operator=(st);
+        name         = st.name;
+        hitPoints    = st.hitPoints;
+        energyPoints = st.energyPoints;
+        attackDamage = st.attackDamage;
+    }
+    return *this;
 }
 
 DiamondTrap::~DiamondTrap() {

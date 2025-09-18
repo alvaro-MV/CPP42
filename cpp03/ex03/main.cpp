@@ -3,10 +3,13 @@
 int main()
 {
 	DiamondTrap trap("Raton");
+	DiamondTrap other;
+
+	other = trap;
 
 	std::cout << "\n-----------------------------------------------\n" << std::endl;
 
-	trap.whoAmI();
+	other.whoAmI();
 
 	for (int i = 0; i < 3; i++)
 		trap.attack("RATAAT");

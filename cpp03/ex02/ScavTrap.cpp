@@ -4,7 +4,6 @@ ScavTrap::ScavTrap(): ClapTrap("Scav") {
 	this->hitPoints = 100;
 	this->energyPoints = 50;
 	this->attackDamage = 20;
-	this->type_trap = "ScavTrap";
 	std::cout << "ScavTrap " << this->name 
           << " has entered the arena, guarding the gates!!" << std::endl;
 };
@@ -13,7 +12,6 @@ ScavTrap::ScavTrap(std::string name): ClapTrap(name) {
 	this->hitPoints = 100;
 	this->energyPoints = 50;
 	this->attackDamage = 20;
-	this->type_trap = "ScavTrap";
 	std::cout << "ScavTrap " << this->name 
           << " has entered the arena, guarding the gates!!" << std::endl;
 };
@@ -35,6 +33,10 @@ ScavTrap::ScavTrap(const ScavTrap& sv): ClapTrap(sv.name) {
 ScavTrap::~ScavTrap() {
 
 	std::cout << "ScavTrap " << this->name << " goes to garbage." << std::endl;
+}
+
+void ScavTrap::attack(const std::string &target) {
+	std::cout << "ScavTrap " << this->name << " attack " << target  <<" guardind the Gate." << std::endl;
 }
 
 void ScavTrap::guardGate(void) {

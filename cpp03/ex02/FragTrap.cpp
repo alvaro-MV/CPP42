@@ -5,30 +5,34 @@ FragTrap::FragTrap(): ClapTrap("frag") {
 	this->hitPoints = 100;
 	this->energyPoints = 100;
 	this->attackDamage = 30;
-	this->type_trap = "FragTrap";
-	std::cout << "FragTrap " << name << " is here, ready to throw grenades everywhere!!" << std::endl;
+	std::cout << "FragTrap " << this->name << " is here, ready to throw grenades everywhere!!" << std::endl;
 };
 
 FragTrap::FragTrap(std::string name): ClapTrap(name) {
 	this->hitPoints = 100;
 	this->energyPoints = 100;
 	this->attackDamage = 30;
-	this->type_trap = "FragTrap";
-	std::cout << "FragTrap " << name << " is here, ready to throw grenades everywhere!!" << std::endl;
+	std::cout << "FragTrap " << this->name << " is here, ready to throw grenades everywhere!!" << std::endl;
 };
 
 FragTrap& FragTrap::operator=(const FragTrap& sv) {
-	this->name = sv.name;
-	this->energyPoints = sv.energyPoints;
-	this->hitPoints = sv.hitPoints;
-	this->attackDamage = sv.attackDamage;
+	if (&sv != this) {
+		ClapTrap::operator=(sv);
+		this->name = sv.name;
+		this->energyPoints = sv.energyPoints;
+		this->hitPoints = sv.hitPoints;
+		this->attackDamage = sv.attackDamage;
+	}
 	return (*this);
 }
 
-FragTrap::FragTrap(const FragTrap& sv): ClapTrap(sv.name) {
-	this->energyPoints = sv.energyPoints;
-	this->hitPoints = sv.hitPoints;
-	this->attackDamage = sv.attackDamage;
+FragTrap::FragTrap(const FragTrap& sv): ClapTrap(sv) {
+	if (&sv != this) {
+		this->name = sv.name;
+		this->energyPoints = sv.energyPoints;
+		this->hitPoints = sv.hitPoints;
+		this->attackDamage = sv.attackDamage;
+	}
 }
 
 FragTrap::~FragTrap() {

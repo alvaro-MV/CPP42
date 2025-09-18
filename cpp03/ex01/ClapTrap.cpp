@@ -8,7 +8,6 @@ ClapTrap::ClapTrap(): name("default"),
 }
 
 ClapTrap::ClapTrap(std::string name): name(name), 
-				   type_trap("ClapTrap"),
 				   hitPoints(10), 
 				   energyPoints(10),
 				   attackDamage(0) {
@@ -17,10 +16,16 @@ ClapTrap::ClapTrap(std::string name): name(name),
 
 ClapTrap::ClapTrap(const ClapTrap& ct) {
 	this->name = ct.name;
+	this->hitPoints = ct.hitPoints;
+	this->energyPoints = ct.energyPoints;
+	this->attackDamage = ct.attackDamage;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& ct) {
 	this->name = ct.name;
+	this->hitPoints = ct.hitPoints;
+	this->energyPoints = ct.energyPoints;
+	this->attackDamage = ct.attackDamage;
 	return (*this);
 }
 
@@ -31,7 +36,7 @@ ClapTrap::~ClapTrap() {
 void ClapTrap::attack(const std::string& target) {
 	if (!this->hitPoints)
 	{
-		std::cout << GREEN << name << " can not attack, has died." << RESET << std::endl;
+		std::cout << GREEN << this->name << " can not attack, has died." << RESET << std::endl;
 		return ;
 	}
 	if (!energyPoints) {
@@ -65,7 +70,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (!this->hitPoints)
 	{
-		std::cout << MAGENTA << name << " can not be repaired, has died." << std::endl;
+		std::cout << MAGENTA << name << "can not be repaired, has died." << std::endl;
 		return ;
 	}
 	std::cout << MAGENTA << "ClapTrap " 
