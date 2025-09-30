@@ -1,22 +1,23 @@
 #include "Cat.hpp"
 
-Cat::Cat() {
+Cat::Cat(): Animal() {
 
 	this->type = "Cat";
 	std::cout << "Cat created." << std::endl;
 }
 
-Cat::Cat(const Cat& cat) {
-	this->type = cat.type;
+Cat::Cat(const Cat& cat): Animal() {
+	(void) cat;
+	// this->type = cat.type;
 }
 
 Cat& Cat::operator=(const Cat& cat) {
-	this->type = cat.type;
+	(void) cat;
+	// this->type = cat.type;
 	return (*this);
 }
 
 Cat::~Cat() {
-
 	std::cout << "Cat destroyed." << std::endl;
 }
 
