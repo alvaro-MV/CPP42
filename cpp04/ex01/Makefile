@@ -1,5 +1,5 @@
 CXX:=c++
-CXXFLAGS:=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS:=-Wall -Wextra -Werror -std=c++98 -g
 NAME:=animal
 SRCS:= main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp # WrongAnimal.cpp WrongCat.cpp 
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))

@@ -44,3 +44,7 @@ void Cat::setIdea(int idx, std::string idea) {
 	else
 		this->brain->set_idea_idx(idx, idea);
 }
+
+std::string Cat::getType(void) const {
+	return (this->type);
+}

@@ -7,12 +7,18 @@ Dog::Dog() {
 }
 
 Dog::Dog(const Dog& dog) {
+	if (this != &dog)
+		brain = new Brain(*dog.brain);
 	this->type = dog.type;
 }
 
 Dog& Dog::operator=(const Dog& dog) {
-	this->type = dog.type;
-	return (*this);
+    if (this != &dog) {
+        Animal::operator=(dog);
+        if (brain) delete brain;
+        brain = new Brain(*dog.brain); // deep copy
+    }
+    return *this;
 }
 
 Dog::~Dog() {
@@ -42,4 +48,8 @@ void Dog::setIdea(int idx, std::string idea) {
 		<< " brain don't posses that idea." << std::endl;
 	else
 		this->brain->set_idea_idx(idx, idea);
+}
+
+std::string Dog::getType(void) const {
+	return (this->type);
 }

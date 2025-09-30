@@ -8,12 +8,19 @@ Cat::Cat() {
 }
 
 Cat::Cat(const Cat& cat) {
+    if (this != &cat) {
+        brain = new Brain(*cat.brain); // deep copy
+    }
 	this->type = cat.type;
 }
 
 Cat& Cat::operator=(const Cat& cat) {
-	this->type = cat.type;
-	return (*this);
+    if (this != &cat) {
+        Animal::operator=(cat);
+        if (brain) delete brain;
+        brain = new Brain(*cat.brain); // deep copy
+    }
+    return *this;
 }
 
 Cat::~Cat() {

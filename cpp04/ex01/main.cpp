@@ -5,6 +5,13 @@
 int main()
 {
 	Animal *zoo[4];
+
+	Dog basic;
+	{
+		Dog tmp(basic);
+		tmp = basic;
+	}
+
 	for (int i = 0; i < 4; i++)
 	{
 		if (i > 1)
@@ -17,6 +24,7 @@ int main()
 	zoo[0]->makeSound();
 	zoo[0]->setIdea(5, "Listeza");
 	zoo[0]->getIdea(5);
+	zoo[0]->getIdea(0);
 	zoo[0]->getIdea(-5);
 
 	std::cout << std::endl;

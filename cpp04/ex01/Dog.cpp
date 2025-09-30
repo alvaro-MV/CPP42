@@ -6,19 +6,16 @@ Dog::Dog() {
 	std::cout << "Dog created." << std::endl;
 }
 
-Dog::Dog(const Dog& dog) {
-	if (this != &dog) {
-		Animal::operator=(dog);
-		delete brain;
+Dog::Dog(const Dog& dog): Animal(dog) {
+	if (this != &dog)
 		brain = new Brain(*dog.brain);
-	}
 	this->type = dog.type;
 }
 
 Dog& Dog::operator=(const Dog& other) {
     if (this != &other) {
         Animal::operator=(other);
-        delete brain;
+        if (brain) delete brain;
         brain = new Brain(*other.brain); // deep copy
     }
     return *this;
