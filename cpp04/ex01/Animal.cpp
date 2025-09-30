@@ -6,11 +6,13 @@ Animal::Animal() {
 }
 
 Animal::Animal(const Animal& animal) {
-	this->type = animal.type;
+	if (this != &animal)
+		this->type = animal.type;
 }
 
 Animal& Animal::operator=(const Animal& animal) {
-	this->type = animal.type;
+	if (this != &animal)
+		this->type = animal.type;
 	return (*this);
 }
 
@@ -26,10 +28,10 @@ std::string Animal::getType(void) const{
 	return (this->type);
 }
 
-void Animal::getIdea(int idx) const {
-	std::cout << "Have I brain?" << std::endl;
-}
+// void Animal::getIdea(int idx) const {
+// 	std::cout << "Have I brain?" << std::endl;
+// }
 
-void Animal::setIdea(int idx, std::string idea) {
-	std::cout << "Have I brain?" << std::endl;
-}
+// void Animal::setIdea(int idx, std::string idea) {
+// 	std::cout << "Have I brain?" << std::endl;
+// }

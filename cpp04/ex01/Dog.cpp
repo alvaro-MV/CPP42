@@ -7,12 +7,21 @@ Dog::Dog() {
 }
 
 Dog::Dog(const Dog& dog) {
+	if (this != &dog) {
+		Animal::operator=(dog);
+		delete brain;
+		brain = new Brain(*dog.brain);
+	}
 	this->type = dog.type;
 }
 
-Dog& Dog::operator=(const Dog& dog) {
-	this->type = dog.type;
-	return (*this);
+Dog& Dog::operator=(const Dog& other) {
+    if (this != &other) {
+        Animal::operator=(other);
+        delete brain;
+        brain = new Brain(*other.brain); // deep copy
+    }
+    return *this;
 }
 
 Dog::~Dog() {
