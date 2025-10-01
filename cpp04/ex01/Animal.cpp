@@ -1,12 +1,11 @@
 #include "Animal.hpp"
 
 Animal::Animal() {
-	this->type = "Animal.";
+	this->type = "Animal";
 	std::cout << "Animal created." << std::endl;
 }
 
 Animal::Animal(const Animal& animal) {
-	if (this != &animal)
 		this->type = animal.type;
 }
 
@@ -28,10 +27,13 @@ std::string Animal::getType(void) const{
 	return (this->type);
 }
 
-// void Animal::getIdea(int idx) const {
-// 	std::cout << "Have I brain?" << std::endl;
-// }
+void Animal::getIdea(int idx) const {
+	(void) idx;
+	std::cout << "Have I brain?" << std::endl;
+}
 
-// void Animal::setIdea(int idx, std::string idea) {
-// 	std::cout << "Have I brain?" << std::endl;
-// }
+void Animal::setIdea(int idx, std::string idea) {
+	(void) idx;
+	(void) idea;
+	std::cout << "Have I brain?" << std::endl;
+}

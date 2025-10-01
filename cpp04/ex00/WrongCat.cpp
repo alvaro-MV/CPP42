@@ -6,7 +6,7 @@ WrongCat::WrongCat() {
 	std::cout << "WrongCat created." << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat& wrongCat) {
+WrongCat::WrongCat(const WrongCat& wrongCat): WrongAnimal(wrongCat) {
 	this->type = wrongCat.type;
 }
 

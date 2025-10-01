@@ -7,13 +7,17 @@ Cat::Cat() {
 	std::cout << "Cat created." << std::endl;
 }
 
-Cat::Cat(const Cat& cat) {
-	this->type = cat.type;
+Cat::Cat(const Cat& cat): Animal(cat) {
+    brain = new Brain(*cat.brain); // deep copy
 }
 
 Cat& Cat::operator=(const Cat& cat) {
-	this->type = cat.type;
-	return (*this);
+    if (this != &cat) {
+        Animal::operator=(cat);          // copia 'type' y lo que toque en base
+        if (brain) delete brain;         // evita fuga
+        brain = new Brain(*cat.brain);   // deep copy
+    }
+    return *this;
 }
 
 Cat::~Cat() {

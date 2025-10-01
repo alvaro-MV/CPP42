@@ -6,14 +6,13 @@ Cat::Cat(): Animal() {
 	std::cout << "Cat created." << std::endl;
 }
 
-Cat::Cat(const Cat& cat): Animal() {
-	(void) cat;
+Cat::Cat(const Cat& cat): Animal(cat) {
 	// this->type = cat.type;
 }
 
 Cat& Cat::operator=(const Cat& cat) {
-	(void) cat;
-	// this->type = cat.type;
+	if (this != &cat)
+		Animal::operator=(cat);
 	return (*this);
 }
 

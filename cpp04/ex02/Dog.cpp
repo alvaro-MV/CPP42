@@ -6,10 +6,8 @@ Dog::Dog() {
 	std::cout << "Dog created." << std::endl;
 }
 
-Dog::Dog(const Dog& dog) {
-	if (this != &dog)
+Dog::Dog(const Dog& dog): Animal(dog) {
 		brain = new Brain(*dog.brain);
-	this->type = dog.type;
 }
 
 Dog& Dog::operator=(const Dog& dog) {

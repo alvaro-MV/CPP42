@@ -7,9 +7,7 @@ Dog::Dog() {
 }
 
 Dog::Dog(const Dog& dog): Animal(dog) {
-	if (this != &dog)
-		brain = new Brain(*dog.brain);
-	this->type = dog.type;
+	brain = new Brain(*dog.brain);
 }
 
 Dog& Dog::operator=(const Dog& other) {

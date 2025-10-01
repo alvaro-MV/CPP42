@@ -1,7 +1,7 @@
 #include "Animal.hpp"
 
 Animal::Animal() {
-	this->type = "Animal.";
+	this->type = "Animal";
 	std::cout << "Animal created." << std::endl;
 }
 

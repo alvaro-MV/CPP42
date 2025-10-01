@@ -28,9 +28,17 @@ Brain::~Brain() {
 }
 
 std::string Brain::get_idea_idx(int idx) const{
+	if (idx < 0 ||idx >= 100) {
+		std::cout << "idx out of range" << std::endl;
+		return "";
+	}
 	return (this->ideas[idx]);
 }
 
 void Brain::set_idea_idx(int idx, std::string idea) {
+	if (idx < 0 ||idx >= 100) {
+		std::cout << "idx out of range" << std::endl;
+		return ;
+	}
 	this->ideas[idx] = idea;
 }

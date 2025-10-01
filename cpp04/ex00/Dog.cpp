@@ -5,12 +5,12 @@ Dog::Dog() {
 	std::cout << "Dog created." << std::endl;
 }
 
-Dog::Dog(const Dog& dog) {
-	this->type = dog.type;
+Dog::Dog(const Dog& dog): Animal(dog) {
 }
 
 Dog& Dog::operator=(const Dog& dog) {
-	this->type = dog.type;
+	if (this != &dog)
+		Animal::operator=(dog);
 	return (*this);
 }
 
