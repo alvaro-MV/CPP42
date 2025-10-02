@@ -13,6 +13,8 @@
 #include "AMateria.hpp"
 
 AMateria::AMateria(std::string const & type) {
+    _equiped = false;
+    std::cout << "AMateria constructor called." << std::endl;
     this->type = type;
 }
 
@@ -21,6 +23,7 @@ AMateria::~AMateria(){
 }
 
 AMateria::AMateria(const AMateria &a){
+    _equiped = false;
     this->type = a.type;
 }
 
@@ -35,4 +38,15 @@ std::string const & AMateria::getType() const {
 
 void AMateria::use(ICharacter&){
     std::cout << "* uses " << this->type << " *" << std::endl;
+}
+
+bool AMateria::equip(char rw) {
+    if (rw == 'w')
+        _equiped = true;
+    return _equiped;
+}
+bool AMateria::not_equip(char rw) {
+    if (rw == 'w')
+        _equiped = false;
+    return _equiped;
 }

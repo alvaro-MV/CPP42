@@ -10,12 +10,14 @@ Character::Character() : name("default")
 
 Character::Character(std::string name) : name(name)
 {
+    std::cout << "Character " << name << " created." << std::endl;
     for (int i = 0; i < 4; i++)
         inventory[i] = NULL;
 }
 
 Character::Character(const Character &c) : name(c.name)
 {
+    std::cout << "Pero porque entras aqui pedazo de cabron" << std::endl;
     for (int i = 0; i < 4; i++)
     {
         if (c.inventory[i])
@@ -29,7 +31,6 @@ Character &Character::operator=(const Character &other)
 {
     if (this != &other)
     {
-        name = other.name;
         for (int i = 0; i < 4; i++)
         {
             if (inventory[i])
@@ -39,6 +40,7 @@ Character &Character::operator=(const Character &other)
             }
             if (other.inventory[i])
                 inventory[i] = other.inventory[i]->clone();
+
         }
     }
     return *this;
@@ -63,7 +65,7 @@ std::string const & Character::getName() const
 
 void Character::equip(AMateria* m)
 {
-    if (!m)
+    if (!m || m->equip('r'))
         return;
     for (int i = 0; i < 4; i++)
     {
@@ -71,6 +73,7 @@ void Character::equip(AMateria* m)
         {
             inventory[i] = m;
             std::cout << "Equipped materia of type " << m->getType() << " in slot " << i << std::endl;
+            m->equip('w');
             return;
         }
     }
@@ -81,6 +84,7 @@ void Character::unequip(int idx)
 {
     if (idx < 0 || idx >= 4 || !inventory[idx])
         return;
+    inventory[idx]->not_equip('w');
     AMateria* temp = inventory[idx];
     inventory[idx] = NULL;
     std::cout << "Unequipped materia of type " << temp->getType() << " from slot " << idx << std::endl;

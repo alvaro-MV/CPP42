@@ -15,9 +15,8 @@ class Ice : public AMateria {
         Ice &operator=(Ice &other);
         ~Ice();
 
-        std::string const & getType() const;
-        AMateria* clone() const override;
-        void use(ICharacter& target) override;
+        AMateria* clone() const;
+        void use(ICharacter& target);
 };
 
 #endif

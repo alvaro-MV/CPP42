@@ -11,7 +11,7 @@ Ice::Ice(Ice& a) : AMateria(a) {
 }
 
 Ice &Ice::operator=(Ice &other){
-    // this->type = other.type;
+    (void) other;
     std::cout << "Ice copy asignment called" << std::endl;
     return(*this);
 }

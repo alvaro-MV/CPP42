@@ -17,8 +17,8 @@ class Cure : public AMateria {
         ~Cure();
 
         std::string const & getType() const;
-        AMateria* clone() const override;
-        void use(ICharacter& target)  override;
+        AMateria* clone() const;
+        void use(ICharacter& target);
 };
 
 #endif

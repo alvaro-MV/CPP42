@@ -11,7 +11,7 @@ Cure::Cure(Cure& a) : AMateria(a) {
 }
 
 Cure &Cure::operator=(Cure &other){
-    // this->type = other.type;
+    (void) other;
     std::cout << "Cure copy asignment called" << std::endl;
     return(*this);
 }

@@ -8,6 +8,7 @@ class ICharacter;
 
 class AMateria {
     protected:
+        bool _equiped;
         std::string type;
 
     public:
@@ -17,6 +18,8 @@ class AMateria {
         virtual ~AMateria();
 
         std::string const & getType() const;
+        bool equip(char rw);
+        bool not_equip(char rw);
         virtual AMateria* clone() const = 0;
         virtual void use(ICharacter& target);
 };
