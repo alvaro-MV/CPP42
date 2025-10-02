@@ -21,7 +21,7 @@ Character::Character(const Character &c) : name(c.name)
     for (int i = 0; i < 4; i++)
     {
         if (c.inventory[i])
-            inventory[i] = c.inventory[i]->clone();
+            inventory[i] = appendMatArray(&globalMa, c.inventory[i]->clone());
         else
             inventory[i] = NULL;
     }
@@ -39,7 +39,7 @@ Character &Character::operator=(const Character &other)
                 inventory[i] = NULL;
             }
             if (other.inventory[i])
-                inventory[i] = other.inventory[i]->clone();
+                inventory[i] = appendMatArray(&globalMa, other.inventory[i]->clone());
 
         }
     }
@@ -73,6 +73,7 @@ void Character::equip(AMateria* m)
         {
             inventory[i] = m;
             std::cout << "Equipped materia of type " << m->getType() << " in slot " << i << std::endl;
+            appendMatArray(&globalMa, m);
             m->equip('w');
             return;
         }

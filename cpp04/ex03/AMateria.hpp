@@ -6,6 +6,8 @@
 
 class ICharacter;
 
+
+
 class AMateria {
     protected:
         bool _equiped;
@@ -23,5 +25,18 @@ class AMateria {
         virtual AMateria* clone() const = 0;
         virtual void use(ICharacter& target);
 };
+
+typedef struct matArray {
+    AMateria    **arr;
+    size_t      cap;
+    size_t      size;
+} matArray;
+
+void    initMatArray(matArray *arr);
+AMateria    *appendMatArray(matArray *arr, AMateria* mat);
+AMateria    *appendMatArray(matArray *arr, AMateria* mat);
+
+extern matArray globalMa;
+
 
 #endif
