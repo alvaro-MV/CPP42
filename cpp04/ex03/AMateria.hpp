@@ -35,6 +35,7 @@ typedef struct matArray {
 void    initMatArray(matArray *arr);
 AMateria    *appendMatArray(matArray *arr, AMateria* mat);
 AMateria    *appendMatArray(matArray *arr, AMateria* mat);
+bool isInMatArray(matArray *arr, AMateria *mat);
 
 extern matArray globalMa;
 

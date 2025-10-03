@@ -38,8 +38,9 @@ Character &Character::operator=(const Character &other)
                 delete inventory[i];
                 inventory[i] = NULL;
             }
-            if (other.inventory[i])
+            if (other.inventory[i]) {
                 inventory[i] = appendMatArray(&globalMa, other.inventory[i]->clone());
+            }
 
         }
     }
@@ -71,9 +72,10 @@ void Character::equip(AMateria* m)
     {
         if (!inventory[i])
         {
-            inventory[i] = m;
+            if (!isInMatArray(&globalMa, m))
+                appendMatArray(&globalMa, m);
+            inventory[i] = m->clone();
             std::cout << "Equipped materia of type " << m->getType() << " in slot " << i << std::endl;
-            appendMatArray(&globalMa, m);
             m->equip('w');
             return;
         }
@@ -90,6 +92,7 @@ void Character::unequip(int idx)
     inventory[idx] = NULL;
     std::cout << "Unequipped materia of type " << temp->getType() << " from slot " << idx << std::endl;
     std::cout << "AMateria " << temp->getType() << " is now on the floor (not deleted)" << std::endl;
+    //delete temp;
 }
 
 

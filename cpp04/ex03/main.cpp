@@ -12,6 +12,7 @@ extern void    initMatArray(matArray *arr) {
 }
 
 AMateria    *appendMatArray(matArray *arr, AMateria* mat) {
+    std::cout << "mat en arrya: " << mat << std::endl;
     if (arr->cap == arr->size)
     {
         AMateria** tmp = arr->arr;
@@ -19,7 +20,7 @@ AMateria    *appendMatArray(matArray *arr, AMateria* mat) {
         arr->arr = new AMateria*[double_cap];
         for (size_t i = 0; i < arr->cap; i++)
             arr->arr[i] = tmp[i];
-        delete tmp;
+        delete[] tmp;
         arr->cap *= 2;
     }
     arr->arr[arr->size] = mat;
@@ -27,12 +28,21 @@ AMateria    *appendMatArray(matArray *arr, AMateria* mat) {
     return (mat);
 }
 
-void    deleteMatArray(matArray *mat) {
-    for (size_t i = 0; i < mat->size; i++) {
-        if (mat->arr[i] && !mat->arr[i]->equip('r'))
-            delete mat->arr[i];
+void    deleteMatArray(matArray *arr) {
+    for (size_t i = 0; i < arr->size; i++) {
+        std::cout << "Destruction mat en : " << arr->arr[i] << std::endl;
+        if (arr->arr[i])
+            delete arr->arr[i];
     }
-    delete mat->arr;
+    delete[] arr->arr;
+}
+
+bool isInMatArray(matArray *arr, AMateria *mat) {
+    for (size_t i = 0; i < arr->size; i++) {
+        if (arr->arr[i] == mat)
+            return (true);
+    }
+    return false;
 }
 
 matArray globalMa = { NULL, 0, 0 };   // ← definición (reserva memoria)
@@ -52,17 +62,19 @@ int main()
     ICharacter* me = new Character("me");
     AMateria* tmp;
     tmp = src->createMateria("ice");
+    std::cout << "Weon mat en ice: " << tmp << std::endl;
     me->equip(tmp);
     tmp = src->createMateria("cure");
+    std::cout << "Weon mat en cure: " << tmp << std::endl;
     me->equip(tmp);
 
     std::cout << "\n<======= BOB CHARACTER CREATION =========>\n" << std::endl;
     ICharacter* bob = new Character("bob");
     me->unequip(1);
     bob->equip(tmp);
-    // Character *Boboooo = static_cast<Character*>(bob);
-    // Character *Meeee = static_cast<Character*>(me);
-    // *Boboooo = *Meeee;
+    Character *Boboooo = static_cast<Character*>(bob);
+    Character *Meeee = static_cast<Character*>(me);
+    *Boboooo = *Meeee;
 
 
     std::cout << "\n<======= BOB USING =========>\n" << std::endl;
@@ -70,9 +82,9 @@ int main()
     std::cout << "El 1: ", bob->use(1, *me);
     bob->unequip(0);
     bob->use(0, *me);
+    deleteMatArray(&globalMa);
     delete bob;
     delete me;
     delete src;
-    deleteMatArray(&globalMa);
     return 0;
 }  
