@@ -89,10 +89,11 @@ void Character::unequip(int idx)
         return;
     inventory[idx]->not_equip('w');
     AMateria* temp = inventory[idx];
+    if (!isInMatArray(&globalMa, temp))
+        appendMatArray(&globalMa, temp);
     inventory[idx] = NULL;
     std::cout << "Unequipped materia of type " << temp->getType() << " from slot " << idx << std::endl;
     std::cout << "AMateria " << temp->getType() << " is now on the floor (not deleted)" << std::endl;
-    //delete temp;
 }
 
 

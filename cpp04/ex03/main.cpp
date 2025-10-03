@@ -12,7 +12,6 @@ extern void    initMatArray(matArray *arr) {
 }
 
 AMateria    *appendMatArray(matArray *arr, AMateria* mat) {
-    std::cout << "mat en arrya: " << mat << std::endl;
     if (arr->cap == arr->size)
     {
         AMateria** tmp = arr->arr;
@@ -30,7 +29,6 @@ AMateria    *appendMatArray(matArray *arr, AMateria* mat) {
 
 void    deleteMatArray(matArray *arr) {
     for (size_t i = 0; i < arr->size; i++) {
-        std::cout << "Destruction mat en : " << arr->arr[i] << std::endl;
         if (arr->arr[i])
             delete arr->arr[i];
     }
@@ -62,10 +60,8 @@ int main()
     ICharacter* me = new Character("me");
     AMateria* tmp;
     tmp = src->createMateria("ice");
-    std::cout << "Weon mat en ice: " << tmp << std::endl;
     me->equip(tmp);
     tmp = src->createMateria("cure");
-    std::cout << "Weon mat en cure: " << tmp << std::endl;
     me->equip(tmp);
 
     std::cout << "\n<======= BOB CHARACTER CREATION =========>\n" << std::endl;
