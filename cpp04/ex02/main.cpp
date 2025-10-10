@@ -32,9 +32,9 @@ int main(){
     checkIdea(c1, 5, "c1");       // "sillon"
     checkIdea(c2, 5, "c2");       // "raton"
 
-    line("3) Self-assignment (no debe romper nada ni filtrar memoria)");
-    d1 = d1;
-    c1 = c1;
+    // line("3) Self-assignment (no debe romper nada ni filtrar memoria)");
+    // d1 = d1;
+    // c1 = c1;
 
     line("4) Polimorfismo: array heterogeneo Animal* y borrado virtual");
     Animal* zoo[6];

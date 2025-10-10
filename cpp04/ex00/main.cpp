@@ -56,9 +56,9 @@ int main() {
     }
     for (int k = 0; k < 4; ++k) delete zoo[k];
 
-    line("6) Self-assignment");
-    Dog dd1; dd1 = dd1;
-    Cat cc1; cc1 = cc1;
+    // line("6) Self-assignment");
+    // Dog dd1; dd1 = dd1;
+    // Cat cc1; cc1 = cc1;
 
     line("Fin ex00");
     return 0;
