@@ -1,8 +1,14 @@
 #include "Bureaucrat.hpp"
 
 int	main(void) {
-	Bureaucrat currela("EldeLosCafes", 146);
-	currela.decrGrade(2);
-	std::cout << currela << std::endl;
-	currela.decrGrade(9);
+	try {
+		Bureaucrat currela("EldeLosCafes", 146);
+		currela.decrGrade();
+		std::cout << currela << std::endl;
+		for (int i = 0; i < 9; i++)
+			currela.decrGrade();
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 }

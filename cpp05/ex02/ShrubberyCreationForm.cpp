@@ -3,13 +3,15 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-// operator<<, form grade si alguno, beSigned (compare)
-// signForm (facilito).
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string target): AForm("ShrubberyCreationForm", 145, 137), 
+																		target(target),
+																		_signed(false) {
 
+}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &form) 
 : AForm(form.getName(), form.getSignGrade(), form.getExecGrade()),
-      target(form.target) {};
+      target(form.target), _signed(form._signed) {};
 
  ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& form) {
 	this->_signed = form._signed;
@@ -25,6 +27,7 @@ const std::string ShrubberyCreationForm::getTarget(void) const {
 }
 
 void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
+	(void) executor;
 	std::ifstream file;
 	std::string ascii_tree = 
 		"	/\\\n"
@@ -33,8 +36,8 @@ void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
         "   ||\n"
         "   ||\n";
 	
-	file.open(this->getTarget() + "_shrubbery");
-	std::ofstream output(this->getTarget() + "_shrubbery", std::ios::ate|std::ios::trunc); // append at end of file
+	file.open((this->getTarget() + "_shrubbery").c_str());
+	std::ofstream output((this->getTarget() + "_shrubbery").c_str(), std::ios::ate|std::ios::trunc); // append at end of file
 	output << ascii_tree;
 }
 

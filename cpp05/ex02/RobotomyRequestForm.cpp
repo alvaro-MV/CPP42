@@ -2,10 +2,13 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
+RobotomyRequestForm::RobotomyRequestForm(const std::string target): AForm("RobotomyRequestForm", 72, 45), 
+											   target(target),
+											   _signed(false) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &form) 
 : AForm(form.getName(), form.getSignGrade(), form.getExecGrade()),
-      target(form.target) {};
+      target(form.target), _signed(form._signed) {};
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& form) {
 	this->_signed = form._signed;
@@ -21,9 +24,10 @@ const std::string RobotomyRequestForm::getTarget(void) const {
 }
 
 void RobotomyRequestForm::executeAction(Bureaucrat const &executor) const {
+	(void) executor;
 	std::cout << "Bzzzzzzzz... drilling noises..." << std::endl;
 
-    if (std::rand() % 2 == 0) {
+    if (rand() % 2 == 0) {
         std::cout << this->getTarget() << " has been robotomized successfully!" << std::endl;
     } else {
         std::cout << "Robotomy failed on " << this->getTarget() << "." << std::endl;

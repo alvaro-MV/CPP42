@@ -8,17 +8,17 @@
 #include <fstream>
 #include <exception>
 #include <cstring>
+#include <cstdlib>
 
 class Bureaucrat;
 
 class RobotomyRequestForm : public AForm{
 	private:
 		const std::string target;
-		bool _signed = false;
+		bool _signed;
 
 	public:
-		RobotomyRequestForm(const std::string target): AForm("RobotomyRequestForm", 72, 45), target(target) {};
-
+		RobotomyRequestForm(const std::string target);
 		RobotomyRequestForm(const RobotomyRequestForm& sh_form);
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& sh_form);
 		~RobotomyRequestForm();

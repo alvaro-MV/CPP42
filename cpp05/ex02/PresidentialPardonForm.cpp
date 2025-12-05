@@ -2,10 +2,13 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
+PresidentialPardonForm::PresidentialPardonForm(const std::string target): AForm("PresidentialPardonForm", 25, 5), 
+																		  target(target),
+																		  _signed(false) {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &form) 
 : AForm(form.getName(), form.getSignGrade(), form.getExecGrade()),
-      target(form.target) {};
+      target(form.target), _signed(form._signed) {}
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& form) {
 	this->_signed = form._signed;
@@ -21,6 +24,7 @@ const std::string PresidentialPardonForm::getTarget(void) const {
 }
 
 void PresidentialPardonForm::executeAction(Bureaucrat const &executor) const {
+	(void) executor;
     std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 

@@ -9,43 +9,36 @@
 class Form;
 
 class Bureaucrat {
-	private:
-		const std::string name;
-		size_t grade;
 
-	public:
-		Bureaucrat(const std::string name, size_t grade): name(name),
-												  grade(grade) {};
-		Bureaucrat(const Bureaucrat& Bureaucrat);
-		Bureaucrat& operator=(const Bureaucrat& Bureaucrat);
-		~Bureaucrat();
+private:
+    const std::string name;
+    size_t grade;
 
-		const std::string getName(void) const;
-		void setGrade(size_t grade);
-		size_t getGrade(void) const;
-		void incrGrade(size_t incr);
-		void decrGrade(size_t decr);
-		void signForm(Form &form);
+public:
+    Bureaucrat(const std::string &name, int grade);
+    Bureaucrat(const Bureaucrat &other);
+    Bureaucrat &operator=(const Bureaucrat &other);
+    ~Bureaucrat();
 
-		class GradeTooHighException : public std::exception {
-			private:
-				size_t _grade;
+    const std::string &getName() const;
+    size_t getGrade() const;
+    void incrGrade();
+    void decrGrade();
+	
+	void signForm(Form &form);
 
-			public:
-				GradeTooHighException(size_t grade): _grade(grade) {};
-				const char* what(void) const throw();
-		};
+    class GradeTooHighException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
 
-		class GradeTooLowException : public std::exception {
-			private:
-				size_t _grade;
-
-			public:
-				GradeTooLowException(size_t grade): _grade(grade) {};
-				const char* what(void) const throw();
-		};
+    class GradeTooLowException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
 };
- 
-std::ostream& operator<<(std::ostream& os, const Bureaucrat& Bureaucrat);
+
+std::ostream &operator<<(std::ostream &os, const Bureaucrat &b);
+
 
 #endif

@@ -15,11 +15,10 @@ class Bureaucrat;
 class ShrubberyCreationForm : public AForm{
 	private:
 		const std::string target;
-		bool _signed = false;
+		bool _signed;
 
 	public:
-		ShrubberyCreationForm(const std::string target): AForm("ShrubberyCreationForm", 145, 137), target(target) {};
-
+		ShrubberyCreationForm(const std::string target);
 		ShrubberyCreationForm(const ShrubberyCreationForm& sh_form);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& sh_form);
 		~ShrubberyCreationForm();

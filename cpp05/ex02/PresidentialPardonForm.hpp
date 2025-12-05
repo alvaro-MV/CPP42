@@ -14,11 +14,10 @@ class Bureaucrat;
 class PresidentialPardonForm : public AForm{
 	private:
 		const std::string target;
-		bool _signed = false;
+		bool _signed;
 
 	public:
-		PresidentialPardonForm(const std::string target): AForm("PresidentialPardonForm", 25, 5), target(target) {};
-
+		PresidentialPardonForm(const std::string target);
 		PresidentialPardonForm(const PresidentialPardonForm& sh_form);
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& sh_form);
 		~PresidentialPardonForm();
