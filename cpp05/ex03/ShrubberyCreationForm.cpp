@@ -25,7 +25,6 @@ const std::string ShrubberyCreationForm::getTarget(void) const {
 }
 
 void ShrubberyCreationForm::executeAction(void) const {
-	std::ifstream file;
 	std::string ascii_tree = 
 		"	/\\\n"
         "  /  \\\n"
@@ -33,8 +32,7 @@ void ShrubberyCreationForm::executeAction(void) const {
         "   ||\n"
         "   ||\n";
 	
-	file.open(this->getTarget() + "_shrubbery");
-	std::ofstream output(this->getTarget() + "_shrubbery", std::ios::ate|std::ios::trunc); // append at end of file
+	std::ofstream output((this->getTarget() + "_shrubbery").c_str()); // append at end of file
 	output << ascii_tree;
 }
 

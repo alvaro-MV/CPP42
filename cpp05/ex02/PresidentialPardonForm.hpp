@@ -14,7 +14,6 @@ class Bureaucrat;
 class PresidentialPardonForm : public AForm{
 	private:
 		const std::string target;
-		bool _signed;
 
 	public:
 		PresidentialPardonForm(const std::string target);
@@ -26,6 +25,4 @@ class PresidentialPardonForm : public AForm{
 		void executeAction(Bureaucrat const &executor) const;
 };
  
-std::ostream& operator<<(std::ostream& os, const AForm& form);
-
 #endif

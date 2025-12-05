@@ -1,5 +1,5 @@
 CXX:=c++
-CXXFLAGS:=-Wall -Wextra -Werror -std=c++98
+CXXFLAGS:=-Wall -Wextra -Werror -g -std=c++98
 NAME:=bureaucrat
 SRCS:= main.cpp Bureaucrat.cpp AForm.cpp  PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp 
 OBJS := $(patsubst %.cpp,%.o,$(SRCS))

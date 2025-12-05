@@ -15,7 +15,6 @@ class Bureaucrat;
 class RobotomyRequestForm : public AForm{
 	private:
 		const std::string target;
-		bool _signed;
 
 	public:
 		RobotomyRequestForm(const std::string target);
@@ -27,6 +26,5 @@ class RobotomyRequestForm : public AForm{
 		void executeAction(Bureaucrat const &executor) const;
 };
  
-std::ostream& operator<<(std::ostream& os, const AForm& form);
 
 #endif

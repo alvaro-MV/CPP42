@@ -4,17 +4,16 @@
 #include "Bureaucrat.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target): AForm("ShrubberyCreationForm", 145, 137), 
-																		target(target),
-																		_signed(false) {
+																		target(target) {
 
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &form) 
 : AForm(form.getName(), form.getSignGrade(), form.getExecGrade()),
-      target(form.target), _signed(form._signed) {};
+      target(form.target) {};
 
  ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& form) {
-	this->_signed = form._signed;
+	(void) form;
 	return (*this);
 }
 
@@ -28,7 +27,6 @@ const std::string ShrubberyCreationForm::getTarget(void) const {
 
 void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
 	(void) executor;
-	std::ifstream file;
 	std::string ascii_tree = 
 		"	/\\\n"
         "  /  \\\n"
@@ -36,15 +34,7 @@ void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
         "   ||\n"
         "   ||\n";
 	
-	file.open((this->getTarget() + "_shrubbery").c_str());
-	std::ofstream output((this->getTarget() + "_shrubbery").c_str(), std::ios::ate|std::ios::trunc); // append at end of file
+	std::ofstream output((this->getTarget() + "_shrubbery").c_str()); // append at end of file
 	output << ascii_tree;
-}
-
-std::ostream& operator<<(std::ostream& os, const ShrubberyCreationForm& form) {
-	os << "(";
-	os << "ShrubberyCreationForm ";
-	os << form.getTarget();
-	os << ")";
-	return (os);
+	output.close();
 }
