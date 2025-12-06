@@ -4,6 +4,12 @@
 
 #define MAX_VAL 7
 
+std::string toString(size_t sz) {
+    std::ostringstream  oss;
+    oss << sz;
+    return (oss.str());
+}
+
 int main(int, char**)
 {
     const char *what_message;
@@ -48,7 +54,6 @@ int main(int, char**)
     {
         what_message = e.what();
         std::cerr << what_message << '\n';
-        delete[] what_message;
         what_message = NULL;
     }
     try
@@ -60,7 +65,6 @@ int main(int, char**)
 
         what_message = e.what();
         std::cerr << what_message << '\n';
-        delete[] what_message;
     }
     delete [] mirror;//
     return 0;

@@ -6,6 +6,9 @@
 #include <cmath>
 #include <string> 
 #include <cstring> 
+#include <typeinfo>
+
+std::string toString(size_t sz);
 
 template<typename T>
 class Array {
@@ -15,19 +18,15 @@ class Array {
 	public:
 		Array();
 		Array(unsigned int n);
-		Array(Array& array);
-		Array& operator=(Array& array);
-		T& operator[](unsigned int index);
+		Array(const Array& array);
+		Array& operator=(const Array& array);
 		~Array();
-		size_t size();
+		T& operator[](unsigned int index);
+		unsigned int size() const;
 		class IndexOutOfBounds : public std::exception {
-			private:
-					size_t index;
-
 			public:
-					IndexOutOfBounds(unsigned int index): index(index) {};
-					const char* what(void) const throw();
-			};
+				const char* what(void) const throw();
+		};
 };
 
 #include "Array.tpp"
