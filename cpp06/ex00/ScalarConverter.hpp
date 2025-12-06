@@ -7,6 +7,13 @@
 #include <cmath>
 #include <cstring>
 #include <limits>
+#include <sstream>
+
+enum typesTag {
+	DOUBLE = 0,
+	CHAR,
+	TAG0
+};
 
 typedef struct scalarTypes {
 	char *chValue;
@@ -22,6 +29,6 @@ class ScalarConverter {
 
 void error_log();
 void printCharType(scaleTypes *stypes);
-void printScaleTypes(scaleTypes *stypes);
+void printScaleTypes(scaleTypes *stypes, typesTag &tag);
 
 #endif

@@ -9,7 +9,7 @@ typedef struct Data {
 	int iValue;
 	float fValue;
 	double dValue;
-} Data;
+}	Data;
 
 class Serializer {
 	public:

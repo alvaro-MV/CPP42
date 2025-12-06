@@ -14,21 +14,25 @@ Data *Serializer::deserialize(uintptr_t raw) {
 	return (data);
 }
 
-int	main(void) {
-	Data *data = new Data;
-	char *data_str;
-	char int_str[8];
+int main(void) {
+    Data* data = new Data;
 
-	data->iValue = 98;
-	std::cout << "Cual es la direccion de Data*: " << data << std::endl;
-	uintptr_t ui_ptr = Serializer::serialize(data);
-	printf("Cual es la direccion de ui_ptr: %p\n", (void *)ui_ptr);
-	printf("Cual es la direccion de deserialize: %p\n", Serializer::deserialize(ui_ptr));
+    data->iValue = 98;
+    data->fValue = 42.42f;
+    data->dValue = 123.456;
 
-	data_str = reinterpret_cast<char*>(data);
-	memcpy(int_str, data_str, 8);
-	int *int_to_print = reinterpret_cast<int*>(int_str);
-	std::cout << "Int para printar: " << *int_to_print << std::endl;
+    std::cout << "Original pointer:        " << data << std::endl;
 
-	delete data;
+    uintptr_t raw = Serializer::serialize(data);
+    std::cout << "Serialized uintptr_t:    " << reinterpret_cast<void*>(raw) << std::endl;
+
+    Data* restored = Serializer::deserialize(raw);
+    std::cout << "Restored pointer:        " << restored << std::endl;
+
+    std::cout << "\nContenido restaurado:\n";
+    std::cout << "iValue = " << restored->iValue << std::endl;
+    std::cout << "fValue = " << restored->fValue << std::endl;
+    std::cout << "dValue = " << restored->dValue << std::endl;
+
+    delete data;
 }

@@ -9,16 +9,20 @@ void error_log() {
 
 void printCharType(scaleTypes *stypes)
 {
-	if (!stypes->chValue)
+	if (!stypes->iValue)
 		std::cout << "char: impossible" << std::endl;
-	else if ((*stypes->chValue >= 0 && *stypes->chValue <= 31)
-		|| *stypes->chValue == 127)
-		std::cout << "char: Non displayable" << std::endl;
+	else if (!stypes->chValue)
+		std::cout << "char: non displayable" << std::endl;
 	else
 		std::cout << "char: " << *stypes->chValue << std::endl;
 }
 
-void printScaleTypes(scaleTypes *stypes) {
+void printScaleTypes(scaleTypes *stypes, typesTag &tag) {
+	if (tag == TAG0) {
+		error_log();
+		return ;
+	}
+
 	printCharType(stypes);
 	if (stypes->iValue)
 		std::cout << "int: " << *stypes->iValue << std::endl;

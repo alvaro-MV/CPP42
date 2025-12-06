@@ -1,5 +1,5 @@
 #include "B.hpp"
 
 B::~B() {
-	std::cout << "Destructor of B class called." << std::endl;
+	// std::cout << "Destructor of B class called." << std::endl;
 }
