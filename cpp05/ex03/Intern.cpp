@@ -1,5 +1,7 @@
 #include "Intern.hpp"
 
+Intern::Intern() {}
+
 Intern::~Intern(void) {
 	std::cout << "DESTRUCTOR: The Intern has finished the day." << std::endl;
 }
@@ -56,41 +58,30 @@ std::string getFormName(std::string name)
 	4. IsIn??
 */
 AForm *Intern::makeForm(std::string name, std::string target) {
+	AForm *form;
 	size_t index = 0;
 	std::string formName = getFormName(name);
-	std::cout << formName << std::endl;
-	std::string formTypes[] = {"ShruberryCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
+	std::string formTypes[] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
+	std::string creationStr[] = {"Intern creates ", "Intern creates ", "Intern creates ", "The provided Form type does not exist!!"};
 
-	while (index < 3)
-	{
-		if (formName == formTypes[index])
-			break ;
+	while (index < 3 && formName != formTypes[index])
 		index++;
-	}
-	if (index < 3)	
+
+	std::cout << creationStr[index];
+	switch(index)
 	{
-		switch(index)
-		{
-			case 0:
-			{
-				ShrubberyCreationForm *form = new ShrubberyCreationForm(target);
-				std::cout << "Intern creates " << *form << std::endl;
-				return (form);
-			}
-			case 1:
-			{
-				RobotomyRequestForm *form = new RobotomyRequestForm(target);
-				std::cout << "Intern creates " << *form << std::endl;
-				return (form);
-			}
-			case 2:
-			{
-				PresidentialPardonForm *form = new PresidentialPardonForm(target);
-				std::cout << "Intern creates " << *form << std::endl;
-				return (form);
-			}
-		}
+		case 0:
+			form = new ShrubberyCreationForm(target);
+			break;
+		case 1:
+			form = new RobotomyRequestForm(target);
+			break;
+		case 2:
+			form = new PresidentialPardonForm(target);
+			break;
+		default:
+			return (NULL);
 	}
-	std::cout << "The provided Form type does not exist!!" << std::endl;
-	return (NULL);
+	std::cout << *form;
+	return (form);
 }
