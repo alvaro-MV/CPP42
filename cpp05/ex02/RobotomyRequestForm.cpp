@@ -1,34 +1,32 @@
 #include "RobotomyRequestForm.hpp"
-#include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include <cstdlib>
+#include <iostream>
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string target): AForm("RobotomyRequestForm", 72, 45), 
-											   target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
+: AForm("RobotomyRequestForm", 72, 45), _target(target) {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &form) 
-: AForm(form.getName(), form.getSignGrade(), form.getExecGrade()),
-      target(form.target) {};
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
+: AForm(other), _target(other._target) {}
 
-RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& form) {
-	(void) form;
-	return (*this);
+RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &other)
+{
+    AForm::operator=(other);
+    (void)other; // _target is const
+    return *this;
 }
 
-RobotomyRequestForm::~RobotomyRequestForm() {
-	std::cout << "DESTRUCTOR: RobotomyRequestForm archived." << std::endl;
-}
+RobotomyRequestForm::~RobotomyRequestForm() {}
 
-const std::string RobotomyRequestForm::getTarget(void) const {
-	return (this->target);
-}
+const std::string &RobotomyRequestForm::getTarget() const { return _target; }
 
-void RobotomyRequestForm::executeAction(Bureaucrat const &executor) const {
-	(void) executor;
-	std::cout << "Bzzzzzzzz... drilling noises..." << std::endl;
+void RobotomyRequestForm::executeAction(Bureaucrat const &executor) const
+{
+    (void)executor;
+    std::cout << "Bzzzzzzzz... drilling noises..." << std::endl;
 
-    if (rand() % 2 == 0) {
-        std::cout << this->getTarget() << " has been robotomized successfully!" << std::endl;
-    } else {
-        std::cout << "Robotomy failed on " << this->getTarget() << "." << std::endl;
-    }
+    if (std::rand() % 2 == 0)
+        std::cout << _target << " has been robotomized successfully!" << std::endl;
+    else
+        std::cout << "Robotomy failed on " << _target << "." << std::endl;
 }

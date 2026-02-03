@@ -1,40 +1,42 @@
-
 #include "ShrubberyCreationForm.hpp"
-#include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include <fstream>
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target): AForm("ShrubberyCreationForm", 145, 137), 
-																		target(target) {
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
+: AForm("ShrubberyCreationForm", 145, 137), _target(target) {}
 
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+: AForm(other), _target(other._target) {}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
+{
+    AForm::operator=(other);
+    (void)other; // _target is const
+    return *this;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &form) 
-: AForm(form.getName(), form.getSignGrade(), form.getExecGrade()),
-      target(form.target) {};
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
- ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& form) {
-	(void) form;
-	return (*this);
-}
+const std::string &ShrubberyCreationForm::getTarget() const { return _target; }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {
-	std::cout << "DESTRUCTOR: ShrubberyCreationForm archived." << std::endl;
-}
+void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const
+{
+    (void)executor;
+    std::string filename = _target + "_shrubbery";
+    std::ofstream out(filename.c_str());
+    if (!out)
+        throw std::runtime_error("ShrubberyCreationForm: cannot open file");
 
-const std::string ShrubberyCreationForm::getTarget(void) const {
-	return (this->target);
-}
+    out <<
+"       _-_\n"
+"    /~~   ~~\\\n"
+" /~~         ~~\\\n"
+"{               }\n"
+" \\  _-     -_  /\n"
+"   ~  \\\\ //  ~\n"
+"_- -   | | _- _\n"
+"  _ -  | |   -_\n"
+"      // \\\\\n";
 
-void ShrubberyCreationForm::executeAction(Bureaucrat const &executor) const {
-	(void) executor;
-	std::string ascii_tree = 
-		"	/\\\n"
-        "  /  \\\n"
-        " /____\\\n"
-        "   ||\n"
-        "   ||\n";
-	
-	std::ofstream output((this->getTarget() + "_shrubbery").c_str()); // append at end of file
-	output << ascii_tree;
-	output.close();
+    out.close();
 }

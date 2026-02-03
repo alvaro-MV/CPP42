@@ -1,9 +1,16 @@
-CXX:=c++
-CXXFLAGS:=-Wall -Wextra -Werror -g -std=c++98
-NAME:=bureaucrat
-SRCS:= main.cpp Bureaucrat.cpp AForm.cpp  PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
-OBJS := $(patsubst %.cpp,%.o,$(SRCS))
+CXX      := c++
+CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 
+NAME := bureaucrat
+
+SRCS := main.cpp \
+        Bureaucrat.cpp \
+        AForm.cpp \
+        ShrubberyCreationForm.cpp \
+        RobotomyRequestForm.cpp \
+        PresidentialPardonForm.cpp
+
+OBJS := $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
@@ -11,10 +18,10 @@ $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:
-	@rm -rf $(OBJS)
+	rm -f $(OBJS)
 
 fclean: clean
-	@rm -rf $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
