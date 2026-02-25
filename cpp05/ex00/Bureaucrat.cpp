@@ -19,7 +19,8 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other)
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
     if (this != &other)
-        this->grade = other.grade;
+    	*this = copy;
+
     return *this;
 }
 

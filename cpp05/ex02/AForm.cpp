@@ -16,7 +16,7 @@ AForm::AForm(const AForm &other)
 AForm &AForm::operator=(const AForm &other)
 {
     if (this != &other)
-        _signed = other._signed;
+        *this = copy;
     return *this;
 }
 
