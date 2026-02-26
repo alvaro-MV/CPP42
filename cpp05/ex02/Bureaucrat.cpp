@@ -14,7 +14,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other)
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
     if (this != &other)
-        *this = copy;
+        *this = other;
     return *this;
 }
 

@@ -16,7 +16,7 @@ AForm::AForm(const AForm &other)
 AForm &AForm::operator=(const AForm &other)
 {
     if (this != &other)
-        *this = copy;
+        *this = other;
     return *this;
 }
 

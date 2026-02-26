@@ -23,7 +23,7 @@ Form::Form(const Form& form): name(form.name),
 
 Form& Form::operator=(const Form& form) {
 	if (this != &form)
-		*this = copy;
+		*this = form;
 	return (*this);
 }
 
