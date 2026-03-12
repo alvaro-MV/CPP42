@@ -1,5 +1,9 @@
 #include "Serializer.hpp"
 
+Serializer::Serializer() {}
+Serializer::~Serializer() {}
+
+
 uintptr_t Serializer::serialize(Data* ptr) {
 	uintptr_t ui_ptr;
 

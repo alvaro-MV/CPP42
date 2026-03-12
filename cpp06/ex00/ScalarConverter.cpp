@@ -1,5 +1,8 @@
 #include "ScalarConverter.hpp"
 
+ScalarConverter::ScalarConverter() {}
+ScalarConverter::~ScalarConverter() {}
+
 int allocScaleTypes(scaleTypes *stypes) {
 	try {
 		stypes->dValue = new double;
