@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../ex01/iter.hpp"
 #include "Array.hpp"
+#include "sstream"
 
 #define MAX_VAL 7
 
