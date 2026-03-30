@@ -1,5 +1,38 @@
 #include "Span.hpp"
 
+Span::Span(): N(0) {
+	shortest = std::numeric_limits<int>::max();
+	max = 0;
+	min =  std::numeric_limits<int>::max();
+}
+
+Span::Span(unsigned int N): N(N) {
+	shortest = std::numeric_limits<int>::max();
+	max = 0;
+	min =  std::numeric_limits<int>::max();
+}
+
+Span::Span(const Span& s) {
+	N = s.N;
+	span = s.span;
+	shortest = s.shortest;
+	max = s.max;
+	min = s.min;
+}
+
+Span&	Span::operator=(const Span& s) {
+	N = s.N;
+	span = s.span;
+	shortest = s.shortest;
+	max = s.max;
+	min = s.min;
+	return (*this);
+}
+
+Span::~Span() {
+	std::cout << "Span destroyed\n";
+}
+
 void	Span::insert_and_recalc(int n) {
 	std::multiset<int>::iterator	it;
 
