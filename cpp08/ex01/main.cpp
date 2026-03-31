@@ -54,11 +54,11 @@
 int main() {
 
     Span sp(8000);
-    std::srand(std::time(nullptr));
+    std::srand(std::time(NULL));
     int v[10000];
 
     for (int i = 0; i < 10000; ++i) {
-        int a = std::rand() %100000;
+        int a = rand() % 100000;
         v[i] = a;
     }
 

@@ -43,8 +43,11 @@ void	Span::insert_and_recalc(int n) {
 		if (it != span.begin()) {
 			std::multiset<int>::iterator prev = it;
 			prev--;
-			if (prev != span.begin())
-				this->shortest = *it - *prev < this->shortest ? *it - *prev : this->shortest;
+			if (it != span.begin()) {
+				std::multiset<int>::iterator prev = it;
+				--prev;
+				shortest = std::min(shortest, *it - *prev);
+			}
 		}
 		if (it != span.end()) {
 			std::multiset<int>::iterator next = it;
@@ -65,32 +68,22 @@ void Span::addNumber(int n) {
 	insert_and_recalc(n);
 }
 
-unsigned int Span::shortestSpan() {
+int Span::shortestSpan() const {
 	if (span.size() < 2)
 			throw Span::Less2ThanException(N);
 	return (shortest);
 }
 
-unsigned int Span::longestSpan() {
+int Span::longestSpan() const {
 	if (span.size() < 2)
 		throw Span::Less2ThanException(N);
 	return (max - min);
 }
 
-const char	*Span::OutOfSpaceException::what(void) const throw() {
-	std::string problem = "OutOfSpaceException: "
-	+ std::to_string(this->_N)
-	+" slots filled.\n";
-	
-	char *ret = new char[problem.length() + 1];
-	std::strcpy(ret, problem.c_str());
-	return (ret);
+const char* Span::OutOfSpaceException::what() const throw() {
+    return "OutOfSpaceException: span is full";
 }
 
-const char	*Span::Less2ThanException::what(void) const throw() {
-	std::string problem = "Less2ThanException: less than two element filled. Impossible to calculate spans.\n";
-	
-	char *ret = new char[problem.length() + 1];
-	std::strcpy(ret, problem.c_str());
-	return (ret);
+const char* Span::Less2ThanException::what() const throw() {
+    return "Less2ThanException: not enough elements";
 }

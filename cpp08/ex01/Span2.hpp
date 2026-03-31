@@ -7,6 +7,7 @@
 # include <utility>
 # include <string>
 # include <cstring>
+# include <cstdlib>
 # include <ctime>
 # include <limits>
 
@@ -40,12 +41,12 @@ class Span {
 			}
 		}
 
-		unsigned int	shortestSpan();
-		unsigned int	longestSpan();
+		int	shortestSpan() const;
+		int	longestSpan() const;
 
 		class OutOfSpaceException : public std::exception {
 			private:
-				size_t _N;
+				unsigned int _N;
 
 			public:
 				OutOfSpaceException(unsigned int N): _N(N){}
@@ -54,7 +55,7 @@ class Span {
 
 		class Less2ThanException : public std::exception {
 			private:
-				size_t _N;
+				unsigned int _N;
 
 			public:
 				Less2ThanException(unsigned int N): _N(N) {}
