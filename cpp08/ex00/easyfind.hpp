@@ -1,15 +1,16 @@
-#ifndef EASYFIND_H
-#define EASYFIND_H
-
-#include <iostream>
-#include <vector>
 #include <list>
-#include <typeinfo>
-#include <stdexcept>
+#include <vector>
+#include <deque>
+#include <iostream>
 
-template<typename T>
-T easyfind(T container, int pattern);
-
-#include "easyfind.tpp"
-
-#endif
+template <typename T>
+typename T::iterator easyfind(T &array, int pattern) {
+    typename T::iterator it = array.begin();
+    while (it != array.end() ) {
+        if (*it == pattern) {
+            return (it);
+        }
+        it++;
+    }
+    throw std::out_of_range("Value not found");
+}

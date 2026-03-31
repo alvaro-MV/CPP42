@@ -64,21 +64,24 @@ void	Span::insert_and_recalc(int n) {
 
 void Span::addNumber(int n) {
 	if (span.size() == N)
-		throw Span::OutOfSpaceException(N);
+		throw Span::OutOfSpaceException();
 	insert_and_recalc(n);
 }
 
 int Span::shortestSpan() const {
 	if (span.size() < 2)
-			throw Span::Less2ThanException(N);
+			throw Span::Less2ThanException();
 	return (shortest);
 }
 
 int Span::longestSpan() const {
 	if (span.size() < 2)
-		throw Span::Less2ThanException(N);
+		throw Span::Less2ThanException();
 	return (max - min);
 }
+
+Span::OutOfSpaceException::OutOfSpaceException() {}
+Span::Less2ThanException::Less2ThanException() {}
 
 const char* Span::OutOfSpaceException::what() const throw() {
     return "OutOfSpaceException: span is full";

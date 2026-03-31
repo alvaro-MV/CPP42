@@ -35,7 +35,7 @@ class Span {
 		void addRange(Inputiterator first, Inputiterator last) {
 			while (first != last) {
 				if (span.size() == N)
-					throw  Span::OutOfSpaceException(N);
+					throw  Span::OutOfSpaceException();
 				insert_and_recalc(*first);
 				first++;
 			}
@@ -45,20 +45,14 @@ class Span {
 		int	longestSpan() const;
 
 		class OutOfSpaceException : public std::exception {
-			private:
-				unsigned int _N;
-
 			public:
-				OutOfSpaceException(unsigned int N): _N(N){}
+				OutOfSpaceException();
 				const char* what(void) const throw();
 		};
 
 		class Less2ThanException : public std::exception {
-			private:
-				unsigned int _N;
-
 			public:
-				Less2ThanException(unsigned int N): _N(N) {}
+				Less2ThanException();
 				const char* what(void) const throw();
 		};
 };
