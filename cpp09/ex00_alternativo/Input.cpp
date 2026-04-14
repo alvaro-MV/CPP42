@@ -11,7 +11,7 @@ Input::~Input() {
 		file.close();
 }
 
-void Input::findAndPrintRows(Database &db) {
+void Input::findAndPrintRows(BitcoinExchange &db) {
 	std::string line;
 	DataBtc::Row row;
 	DataBtc::Row nearest;

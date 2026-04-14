@@ -19,7 +19,7 @@ void	BitcoinExchange::insertDatabase() {
 		std::pair<std::string, std::string> dateAndValue = getDateAndValue(line);
 		try {
 			row = fillRow(dateAndValue);
-			std::pair<DataBtc::Row, double> database_entry = {row, row.value};
+			std::pair<DataBtc::Row, double> database_entry(row, row.value);
 			database.insert(database_entry);
 		}
 		catch(std::exception &e) {
@@ -28,7 +28,7 @@ void	BitcoinExchange::insertDatabase() {
 	}
 }
 
-DataBtc::Row BitcoinExchange::findNearest(DataBtc::Row &search) const {
+DataBtc::Row BitcoinExchange::findNearest(const DataBtc::Row &search) const {
 	std::multimap<DataBtc::Row, double, CompareDateRows>::const_iterator it = database.begin();
 	CompareDateRows comp;
 	

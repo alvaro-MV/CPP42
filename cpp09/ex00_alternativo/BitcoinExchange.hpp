@@ -11,14 +11,14 @@ class BitcoinExchange:public DataBtc {
 		~BitcoinExchange();
 
 		struct CompareDateRows {
-			bool operator()(DataBtc::Row a, DataBtc::Row b) const {
+			bool operator()(const DataBtc::Row &a, const DataBtc::Row &b) const {
 				if (a.year != b.year) return a.year < b.year;
 				if (a.month != b.month) return a.month < b.month;
 				return a.day < b.day;
 			}
 		};
 		void	insertDatabase();
-		Row		findNearest(Row &search) const;
+		Row		findNearest(const Row &search) const;
 	
 	private:
 		std::multimap<DataBtc::Row, double, CompareDateRows> database;

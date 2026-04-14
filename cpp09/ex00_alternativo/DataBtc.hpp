@@ -47,15 +47,16 @@ class DataBtc {
 
 			public:
 				BadInput(const std::string& _msg);
+				~BadInput() throw();
 
 				virtual const char *what() const throw();
 		};
 
 
 	protected:
+		std::string			filename;
 		const std::string	del;
 		std::fstream		file;
-		std::string			filename;
 
 		std::string trimDelAndSpaces(std::string s);
 		std::pair<std::string, std::string> splitByDel(std::string &line, std::string del);

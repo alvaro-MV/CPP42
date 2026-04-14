@@ -6,7 +6,7 @@ DataBtc::DataBtc(): filename(""), del("") {
 }
 
 DataBtc::DataBtc(std::string filename, std::string del): filename(filename), del(del) {
-	file.open(filename, std::ios::in);
+	file.open(filename.c_str(), std::ios::in);
 	
 	if (!file.is_open()) {
         std::cerr << "Error: could not open file " << std::endl;
@@ -15,7 +15,7 @@ DataBtc::DataBtc(std::string filename, std::string del): filename(filename), del
 }
 
 DataBtc::DataBtc(const DataBtc& data): filename(data.filename), del(data.del) {
-	file.open(filename, std::ios::in);
+	file.open(filename.c_str(), std::ios::in);
 	
 	if (!file.is_open()) {
         std::cerr << "Error: could not open file " << std::endl;
@@ -112,16 +112,15 @@ DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) 
 
 std::pair<std::string, std::string> DataBtc::splitByDel(std::string &line, std::string del) {
 	size_t	del_pos = line.find(del);
-	std::pair<std::string, std::string> ret;
 	
 	if (del_pos == std::string::npos) {
-		ret = {line, ""};
+		std::pair<std::string, std::string> ret(line, "");
 		return (ret);
 	}
 
 	std::string first = line.substr(0, del_pos);
 	std::string second = line.substr(del_pos + del.length());
-	ret = {first, second};
+	std::pair<std::string, std::string> ret(first, second);
 	return (ret);
 }
 
@@ -143,8 +142,9 @@ std::string DataBtc::trimDelAndSpaces(std::string s) {
 
 size_t DataBtc::mfind(std::string &s, std::string pattern, size_t iters) {
 	int pos = -1;
-	while (iters && (pos = s.find(pattern, static_cast<size_t>(++pos))) != std::string::npos)
-		--iters;
+	//while (iters && (pos = s.find(pattern, static_cast<size_t>(++pos)) ) != std::string::npos)
+	while (iters && static_cast<size_t>(pos = s.find(pattern, static_cast<size_t>(++pos)) ) != std::string::npos)
+	--iters;
 	return (pos);
 }
 
@@ -190,6 +190,7 @@ bool DataBtc::convertValueToInt(const std::string &value, int& out) {
 }
 
 DataBtc::BadInput::BadInput(const std::string& _msg): _msg("Error: " + _msg) {}
+DataBtc::BadInput::~BadInput() throw() {}
 
 const char * DataBtc::BadInput::what() const throw() {
 	return _msg.c_str();
