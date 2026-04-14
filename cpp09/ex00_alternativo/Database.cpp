@@ -4,6 +4,7 @@ Database::Database(std::string filename): DataBtc(filename, ",") {}
 Database::Database(const Database &other): DataBtc(other.filename, ",") {}
 Database& Database::operator=(const Database &other) {
 	DataBtc::operator=(other);
+	return *this;
 }
 Database::~Database() {
 	if (file.is_open())

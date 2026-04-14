@@ -11,7 +11,7 @@ class Input: public DataBtc {
 		Input &operator=(const Input &input);
 		~Input();
 
-		void findAndPrintRow(Database &db);
+		void findAndPrintRows(Database &db);
 };
 
 #endif

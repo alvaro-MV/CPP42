@@ -4,13 +4,14 @@ Input::Input(std::string filename): DataBtc(filename, "|") {}
 Input::Input(const Input &other): DataBtc(other.filename, "|") {}
 Input& Input::operator=(const Input &other) {
 	DataBtc::operator=(other);
+	return *this;
 }
 Input::~Input() {
 	if (file.is_open())
 		file.close();
 }
 
-void Input::findAndPrintRow(Database &db) {
+void Input::findAndPrintRows(Database &db) {
 	std::string line;
 	DataBtc::Row row;
 	DataBtc::Row nearest;
