@@ -24,6 +24,7 @@
 */
 class DataBtc {
 	public:
+		DataBtc();
 		DataBtc(std::string filename, std::string del);
 		DataBtc(const DataBtc& data);
 		DataBtc& operator=(const DataBtc& data);
@@ -40,6 +41,15 @@ class DataBtc {
 		bool readLine(std::string &line);
 		std::pair<std::string, std::string> getDateAndValue(std::string &line);
 		Row fillRow(std::pair<std::string, std::string> dateAndValue);
+
+		class BadInput: public std::exception {
+			const std::string _msg;
+
+			public:
+				BadInput(const std::string& _msg);
+
+				virtual const char *what() const throw();
+		};
 
 
 	private:

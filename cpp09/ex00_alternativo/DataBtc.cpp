@@ -1,6 +1,11 @@
 #include "DataBtc.hpp"
 
-DataBtc::DataBtc(std::string filename, std::string del): filename(filename), del("|") {
+DataBtc::DataBtc(): filename(""), del("") {
+	std::cout << "Error: could not open file." << std::endl;
+	exit(1);
+}
+
+DataBtc::DataBtc(std::string filename, std::string del): filename(filename), del(del) {
 	file.open(filename, std::ios::in);
 	
 	if (!file.is_open()) {
@@ -43,7 +48,7 @@ bool DataBtc::readLine(std::string &line){
 }
 
 std::pair<std::string, std::string> DataBtc::getDateAndValue(std::string &line) {
-	std::pair<std::string, std::string> dateAndValue = splitByDel(line, del);	
+	std::pair<std::string, std::string> dateAndValue = splitByDel(line, del);
 	
 	dateAndValue.first = trimDelAndSpaces(dateAndValue.first);
 	dateAndValue.second = trimDelAndSpaces(dateAndValue.second);
@@ -62,10 +67,10 @@ DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) 
 	Row row;
 
 	if (date.empty()) {
-		std::cout << "NO hay fecha" << std::endl;
 		year = "";
 		month = "";
 		day = "";
+		throw BadInput("NO hay fecha");
 	}
 	else {
 		yearAndMonth = splitByDel(date, "-");
@@ -73,33 +78,33 @@ DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) 
 		month = yearAndMonth.second;
 	
 		if (month.empty())
-			std::cout << "NO hay mes" << std::endl;
+			throw BadInput("NO hay mes");
 		else {
 			monthAndDay = splitByDel(month, "-");
 			month = monthAndDay.first;
 			day = monthAndDay.second;
 		
 			if (day.empty())
-				std::cout << "NO hay día." << std::endl;
+				throw BadInput("NO hay día");
 		}
 	
 	}
 
-	if (!convertValueToInt(year, row.year) || (row.year < 2009 && row.year > 2026))
-		std::cout << "Año no guarda un formato correcto." << std::endl;
-	if (!convertValueToInt(month, row.month) || (row.month < 0 && row.month > 12))
-		std::cout << "Mes no guarda un formato correcto." << std::endl;
-	if (!convertValueToInt(day, row.day) || (row.day < 0 && row.day > 31)
-		|| (row.day == 29 && row.month == 2
+	if (!convertValueToInt(year, row.year) || (row.year < 2009 || row.year > 2026))
+		throw BadInput("Año no guarda un formato correcto.");
+	if (!convertValueToInt(month, row.month) || (row.month < 1 || row.month > 12))
+		throw BadInput("Mes no guarda un formato correcto.");
+	if (!convertValueToInt(day, row.day) || (row.day < 1 || row.day > 31)
+		|| (row.day >= 29 && row.month == 2
 		&& (row.year % 4 != 0 || (row.year % 100 == 0 && row.year % 400 != 0)) ) )
-		std::cout << "Día no guarda un formato correcto." << std::endl;
+		throw BadInput("Día no guarda un formato correcto.");
 
 	if (!convertValueToFloat(value, row.value))
-		std::cout << "NO valor numérico." << std::endl;
+		throw BadInput("NO valor numérico.");
 	else if (row.value < 0)
-		std::cout << "not a positive number." << std::endl;
+		throw BadInput("not a positive number.");
 	else if (row.value > 1000)
-		std::cout << "too large a number." << std::endl;
+		throw BadInput("too large a number.");
 
 
 	return (row);
@@ -182,4 +187,10 @@ bool DataBtc::convertValueToInt(const std::string &value, int& out) {
 
     out = static_cast<int>(val);
     return true;
+}
+
+DataBtc::BadInput::BadInput(const std::string& _msg): _msg("Error: " + _msg) {}
+
+const char * DataBtc::BadInput::what() const throw() {
+	return _msg.c_str();
 }

@@ -9,10 +9,14 @@ int main() {
 		std::cout << line << std::endl;
 		std::cout << "------------------------------" << std::endl;
 		std::pair<std::string, std::string> dateAndValue = data.getDateAndValue(line);
-		row = data.fillRow(dateAndValue);
+		try {
+			row = data.fillRow(dateAndValue);
 
-		std::cout << "year: " << row.year << " month: " << row.month << " day: ";
-		std::cout << row.day << " value: " << row.value << std::endl;
+			std::cout << "year: " << row.year << " month: " << row.month << " day: ";
+			std::cout << row.day << " value: " << row.value << std::endl;
+		} catch(std::exception &e) {
+			std::cout << e.what() << std::endl;
+		}
 		std::cout << "******************************	" << std::endl;
 
 	}	
