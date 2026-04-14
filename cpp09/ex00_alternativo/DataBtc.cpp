@@ -1,6 +1,6 @@
 #include "DataBtc.hpp"
 
-DataBtc::DataBtc(std::string filename, std::string del): filename(filename), del(" | ") {
+DataBtc::DataBtc(std::string filename, std::string del): filename(filename), del("|") {
 	file.open(filename, std::ios::in);
 	
 	if (!file.is_open()) {
@@ -42,18 +42,55 @@ bool DataBtc::readLine(std::string &line){
 	return (true);
 }
 
-std::pair<std::string, std::string> DataBtc::getValueAndDateAsPair(std::string &line) {
-	std::pair<std::string, std::string> dateAndValue = splitByDel(line, del);
-	
+std::pair<std::string, std::string> DataBtc::getDateAndValue(std::string &line) {
+	std::pair<std::string, std::string> dateAndValue = splitByDel(line, del);	
 	
 	dateAndValue.first = trimDelAndSpaces(dateAndValue.first);
 	dateAndValue.second = trimDelAndSpaces(dateAndValue.second);
+
 	return (dateAndValue);
 }
 
-// Row DataBtc::fillRow() {
+DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) {
+	std::string date = dateAndValue.first;
+	std::string value = dateAndValue.second;
+	std::string year;
+	std::string month;
+	std::string day;
+	std::pair<std::string, std::string> yearAndMonth;
+	std::pair<std::string, std::string> monthAndDay;
+	Row row;
 
-// }
+	if (date.empty()) {
+		std::cout << "NO hay fecha" << std::endl;
+		year = "";
+		month = "";
+		day = "";
+	}
+	else {
+		yearAndMonth = splitByDel(date, "-");
+		year = yearAndMonth.first;
+		month = yearAndMonth.second;
+	
+		if (month.empty())
+			std::cout << "NO hay mes" << std::endl;
+		else {
+			monthAndDay = splitByDel(month, "-");
+			month = monthAndDay.first;
+			day = monthAndDay.second;
+		
+			if (day.empty())
+				std::cout << "NO hay día." << std::endl;
+		}
+	
+	}
+
+	row.day = day;
+	row.month = month;
+	row.year = year;
+	row.value = convertValueToFloat(value);
+	return (row);
+}
 
 std::pair<std::string, std::string> DataBtc::splitByDel(std::string &line, std::string del) {
 	size_t	del_pos = line.find(del);
@@ -76,4 +113,21 @@ std::string DataBtc::trimDelAndSpaces(std::string s) {
 	s = s.substr(s.find_first_not_of(" " + del));	
 	s.erase(s.find_last_not_of(" " + del) + 1);
 	return (s);
+}
+
+size_t DataBtc::mfind(std::string &s, std::string pattern, size_t iters) {
+	int pos = -1;
+	while (iters && (pos = s.find(pattern, static_cast<size_t>(++pos))) != std::string::npos)
+		--iters;
+	return (pos);
+}
+
+float DataBtc::convertValueToFloat(std::string value) {
+	char* end;
+    double val = std::strtod(value.c_str(), &end);
+
+    if (*end != '\0') {
+		std::cout << "Valor no numérico." << std::endl;
+	}
+    return val;
 }

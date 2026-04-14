@@ -11,6 +11,7 @@
 # include <limits>
 # include <stdlib.h>
 
+
 /* 
 	DataBtc es la clase base para las bases de datos de cotizaciones de btc.
 	Tanto Input como Database heredan de ella.
@@ -37,8 +38,8 @@ class DataBtc {
 		
 		// A partir de aqui la mayoria irá en privado.
 		bool readLine(std::string &line);
-		std::pair<std::string, std::string> getValueAndDateAsPair(std::string &line);
-		Row fillRow();
+		std::pair<std::string, std::string> getDateAndValue(std::string &line);
+		Row fillRow(std::pair<std::string, std::string> dateAndValue);
 
 
 	private:
@@ -48,7 +49,8 @@ class DataBtc {
 
 		std::string trimDelAndSpaces(std::string s);
 		std::pair<std::string, std::string> splitByDel(std::string &line, std::string del);
-
+		size_t mfind(std::string &s, std::string pattern, size_t iters);
+		float convertValueToFloat(std::string value);
 };
 
 #endif
