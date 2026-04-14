@@ -85,11 +85,23 @@ DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) 
 	
 	}
 
-	row.day = day;
-	row.month = month;
-	row.year = year;
+	if (!convertValueToInt(year, row.year) || (row.year < 2009 && row.year > 2026))
+		std::cout << "Año no guarda un formato correcto." << std::endl;
+	if (!convertValueToInt(month, row.month) || (row.month < 0 && row.month > 12))
+		std::cout << "Mes no guarda un formato correcto." << std::endl;
+	if (!convertValueToInt(day, row.day) || (row.day < 0 && row.day > 31)
+		|| (row.day == 29 && row.month == 2
+		&& (row.year % 4 != 0 || (row.year % 100 == 0 && row.year % 400 != 0)) ) )
+		std::cout << "Día no guarda un formato correcto." << std::endl;
+
 	if (!convertValueToFloat(value, row.value))
 		std::cout << "NO valor numérico." << std::endl;
+	else if (row.value < 0)
+		std::cout << "not a positive number." << std::endl;
+	else if (row.value > 1000)
+		std::cout << "too large a number." << std::endl;
+
+
 	return (row);
 }
 
@@ -145,5 +157,29 @@ bool DataBtc::convertValueToFloat(std::string value, double &out) {
             return false;
         end++;
     }
+    return true;
+}
+
+bool DataBtc::convertValueToInt(const std::string &value, int& out) {
+    char* end;
+    long val = strtol(value.c_str(), &end, 10);
+
+    // no se ha convertido nada
+    if (end == value.c_str())
+        return false;
+
+    // comprobar basura al final
+    while (*end) {
+        if (!std::isspace(*end))
+            return false;
+        end++;
+    }
+
+    // comprobar overflow de int
+    if (val > (std::numeric_limits<int>::max())
+		|| val < std::numeric_limits<int>::min())
+        return false;
+
+    out = static_cast<int>(val);
     return true;
 }

@@ -30,9 +30,9 @@ class DataBtc {
 		~DataBtc();
 
 		typedef struct  {
-			std::string year;
-			std::string month;
-			std::string day;
+			int year;
+			int month;
+			int day;
 			double		value;
 		} Row;
 		
@@ -51,6 +51,7 @@ class DataBtc {
 		std::pair<std::string, std::string> splitByDel(std::string &line, std::string del);
 		size_t mfind(std::string &s, std::string pattern, size_t iters);
 		bool convertValueToFloat(std::string value, double &out);
+		bool convertValueToInt(const std::string &value, int &out);
 };
 
 #endif
