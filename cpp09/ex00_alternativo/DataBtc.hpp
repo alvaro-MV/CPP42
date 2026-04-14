@@ -28,7 +28,7 @@ class DataBtc {
 		DataBtc(std::string filename, std::string del);
 		DataBtc(const DataBtc& data);
 		DataBtc& operator=(const DataBtc& data);
-		~DataBtc();
+		virtual ~DataBtc();
 
 		typedef struct  {
 			int year;
@@ -52,7 +52,7 @@ class DataBtc {
 		};
 
 
-	private:
+	protected:
 		const std::string	del;
 		std::fstream		file;
 		std::string			filename;
