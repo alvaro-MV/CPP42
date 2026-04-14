@@ -88,7 +88,8 @@ DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) 
 	row.day = day;
 	row.month = month;
 	row.year = year;
-	row.value = convertValueToFloat(value);
+	if (!convertValueToFloat(value, row.value))
+		std::cout << "NO valor numérico." << std::endl;
 	return (row);
 }
 
@@ -107,10 +108,18 @@ std::pair<std::string, std::string> DataBtc::splitByDel(std::string &line, std::
 	return (ret);
 }
 
+bool	checkEmptyString(std::string s) {
+	for (size_t i = 0; i < s.length(); i++) {
+		if (!isspace(s[i]))
+			return (false);
+	}
+	return (true);
+}
+
 std::string DataBtc::trimDelAndSpaces(std::string s) {
-	if (s.empty())
+	if (s.empty() || checkEmptyString(s))
 		return "";
-	s = s.substr(s.find_first_not_of(" " + del));	
+	s = s.substr(s.find_first_not_of(" \n\t\r" + del));	
 	s.erase(s.find_last_not_of(" " + del) + 1);
 	return (s);
 }
@@ -122,12 +131,19 @@ size_t DataBtc::mfind(std::string &s, std::string pattern, size_t iters) {
 	return (pos);
 }
 
-float DataBtc::convertValueToFloat(std::string value) {
-	char* end;
-    double val = std::strtod(value.c_str(), &end);
+bool DataBtc::convertValueToFloat(std::string value, double &out) {
+    char* end;
+    out = strtod(value.c_str(), &end);
 
-    if (*end != '\0') {
-		std::cout << "Valor no numérico." << std::endl;
-	}
-    return val;
+    // no se ha podido convertir nada
+    if (end == value.c_str())
+        return false;
+
+    // comprobar basura después
+    while (*end) {
+        if (!std::isspace(*end))
+            return false;
+        end++;
+    }
+    return true;
 }

@@ -33,7 +33,7 @@ class DataBtc {
 			std::string year;
 			std::string month;
 			std::string day;
-			float		value;
+			double		value;
 		} Row;
 		
 		// A partir de aqui la mayoria irá en privado.
@@ -50,7 +50,7 @@ class DataBtc {
 		std::string trimDelAndSpaces(std::string s);
 		std::pair<std::string, std::string> splitByDel(std::string &line, std::string del);
 		size_t mfind(std::string &s, std::string pattern, size_t iters);
-		float convertValueToFloat(std::string value);
+		bool convertValueToFloat(std::string value, double &out);
 };
 
 #endif
