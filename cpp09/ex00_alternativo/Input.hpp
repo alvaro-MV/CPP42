@@ -2,7 +2,7 @@
 # define INPUT_H
 
 #include "DataBtc.hpp"
-#include "Database.hpp"
+#include "BitcoinExchange.hpp"
 
 class Input: public DataBtc {
 	public:
@@ -11,7 +11,7 @@ class Input: public DataBtc {
 		Input &operator=(const Input &input);
 		~Input();
 
-		void findAndPrintRows(Database &db);
+		void findAndPrintRows(BitcoinExchange &db);
 };
 
 #endif

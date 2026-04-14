@@ -21,10 +21,10 @@ void Input::findAndPrintRows(Database &db) {
 		try {
 			row = fillRow(dateAndValue);
 			nearest = db.findNearest(row);
-			std::cout << line << " ==> " << row.value << " = " << row.value * nearest.value << std::endl;
+			std::cout << dateAndValue.first << " ==> " << row.value << " = " << row.value * nearest.value << std::endl;
 		}
 		catch(std::exception &e) {
-			std::cout << e.what() << " ==> " << line << std::endl;
+			std::cout << e.what() << " ==> " << dateAndValue.first << std::endl;
 		}
 	}
 }

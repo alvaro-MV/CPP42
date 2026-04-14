@@ -1,8 +1,8 @@
 #include "Input.hpp"
 
 int main() {
-	Database db("data.csv");
-	Input in("input.txt");
+	BitcoinExchange db("data.csv");
+	Input in("chatgpt_pruebas.txt");
 
 	db.insertDatabase();
 	in.findAndPrintRows(db);
