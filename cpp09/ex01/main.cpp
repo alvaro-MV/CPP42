@@ -3,7 +3,7 @@
 
 tokens	get_tokens(std::string line) {
     tokens toks;
-    std::stringstream check1(line);
+    std::stringstream check1(line);	
     
     std::string intermediate;
     
@@ -11,7 +11,6 @@ tokens	get_tokens(std::string line) {
     {
         toks.push_back(intermediate);
     }
-	toks.push_back(std::string(""));
 	return (toks);
 }
 
@@ -28,9 +27,7 @@ std::string remove_extra_spaces(const std::string& input) {
     return result;
 }
 
-
-bool is_number(std::string& s)
-{
+bool is_number(std::string& s) {
     std::string::const_iterator it = s.begin();
     while (it != s.end() && std::isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
@@ -52,56 +49,30 @@ bool	is_valid_input(tokens tok) {
 	return (true);
 }
 
-int	RPN_calc(tokens::iterator &it, tokens::iterator begin, tokens::iterator end) {
-	int	contador = 0;
-	bool	fail;
-	ops		op_kind;	
-	int		left, right;
+int	RPN_calc(tokens &toks) {
+	std::stack<int> st;
+	int a;
+	int b;
+	int result;
+	int num;
 
-	if (it == end)
-		it -= 2;
-	std::string s = *it;
-	while (it != begin && contador < 2) {
-		if (is_op(std::string(*it)))
-		{
-			op_kind = (ops) pop(it, begin);
-			if (is_number(*it))
-			{
-				contador++;
-				right = itoa(*it, fail);
-				it--;
-			}
-			else if (is_op(*it))
-			{
-				contador++;
-				right = RPN_calc(it, begin, end);
-			}
-			if (is_number(*it))
-			{
-				contador++;
-				left = itoa(*it, fail);
-				it--;
-			}
-			else if (is_op(*it))
-			{
-				contador++;
-				left = RPN_calc(it, begin, end);
-			}
-			if (contador < 2) {
-				std::cerr << "Error" << std::endl;
-				exit(1);
-			}
-			if (op_kind == add)
-				return (left + right);
-			else if (op_kind == sust)
-				return (left - right);
-			else if (op_kind == mult)
-				return (left * right);
-			else if (op_kind == divs)
-				return (left / right);
+	for (size_t i = 0; i < toks.size(); i++) {
+		if (is_op(toks[i])) {
+			if (st.size() < 2)
+				throw std::runtime_error("Error");
+			b = st.top(); st.pop();
+            a = st.top(); st.pop();
+			result = apply_op(a, b, toks[i]);
+			st.push(result);
+		}
+		else {
+			num = parseInt(toks[i]);
+            st.push(num);
 		}
 	}
-	return (itoa(*it, fail));
+	if (st.size() != 1)
+		throw std::runtime_error("Error");
+	return st.top();
 }
 
 int	main(int argc, char **argv) {
@@ -110,12 +81,12 @@ int	main(int argc, char **argv) {
 		std::cout << "\tp.e. ./RPN \"7 7 * 7 -\"" << std::endl;
 		return (1);
 	}
-	tokens				toks = get_tokens(remove_extra_spaces(argv[1]));
-	if (!is_valid_input(toks))
-	{
-		std::cerr << "Error" << std::endl;
-		return (1);
+	tokens	toks = get_tokens(remove_extra_spaces(argv[1]));
+	
+	try {
+		std::cout << RPN_calc(toks) << std::endl;
 	}
-	tokens::iterator end = toks.end();
-	std::cout << RPN_calc(end, toks.begin(), toks.end()) << std::endl;
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 }

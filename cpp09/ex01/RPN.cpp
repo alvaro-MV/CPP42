@@ -1,40 +1,44 @@
 #include "RPN.hpp"
 
-int			pop(tokens::iterator &i, tokens::iterator e)
+int parseInt(const std::string& str)
 {
-    int 	num;
-    bool	itoa_fail;
+    char* end;
+    long val = std::strtol(str.c_str(), &end, 10);
 
-	num = itoa(*i, itoa_fail);
-	if (itoa_fail == false)
-		return (--i, num);
-	else if (!std::string(*i).compare("+"))
-		return (--i, add);
-	else if (!std::string(*i).compare("-"))
-		return (--i, sust);
-	else if (!std::string(*i).compare("*"))
-		return (--i, mult);
-	else if (!std::string(*i).compare("/"))
-		return (--i, divs);
-	else if (i == e)
-		return (end);
-	else
-		return (end);
+    // 1. No se ha convertido nada
+    if (end == str.c_str())
+        throw std::runtime_error("Error");
+
+    // 2. Hay basura después del número
+    while (*end)
+    {
+        if (!std::isspace(*end))
+            throw std::runtime_error("Error");
+        end++;
+    }
+
+    // 3. Overflow / underflow
+    if (val > std::numeric_limits<int>::max() ||
+        val < std::numeric_limits<int>::min())
+        throw std::runtime_error("Error");
+
+    return static_cast<int>(val);
 }
 
-int	itoa(std::string str, bool &fail) {
-	int num;
-	std::istringstream iss(str);
-
-    iss >> num;
-	if (iss.fail() == false)
-	{
-		fail = false;
-		return (num);
-	}
-	else
-	{
-		fail = true;
-		return (-1);
-	}
+int apply_op(int a, int b, const std::string& op)
+{
+    if (op == "+")
+        return a + b;
+    else if (op == "-")
+        return a - b;
+    else if (op == "*")
+        return a * b;
+    else if (op == "/")
+    {
+        if (b == 0)
+            throw std::runtime_error("Error");
+        return a / b; // división entera
+    }
+    else
+        throw std::runtime_error("Error");
 }

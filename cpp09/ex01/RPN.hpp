@@ -2,31 +2,13 @@
 # define RPN_H
 
 # include <string>
+# include <stack>
 # include <bits/stdc++.h>
-
-enum branches {
-	left = 1,
-	right,
-	root
-};
-
-enum ops {
-	add = 1,
-	sust,
-	mult,
-	divs,
-	end
-};
-
-enum look_obj {
-	NUM = 1,
-	OP,
-	END
-};
+#include <cassert>
 
 typedef std::vector<std::string> tokens;
 
-int			pop(tokens::iterator &i, tokens::iterator e);
-int			itoa(std::string str, bool &fail);
+int	parseInt(const std::string& str);
+int apply_op(int a, int b, const std::string& op);
 
 #endif
