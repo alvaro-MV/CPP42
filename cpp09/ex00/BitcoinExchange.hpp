@@ -1,24 +1,28 @@
-#ifndef BITCOIN_EXCHANGE_H
-# define BITCOIN_EXCHANGE_H
+#ifndef DATABASE_H
+# define DATABASE_H
 
-# include <fstream>
-# include <sstream>
-# include <iostream>
-# include <ios>
-# include <string>
-# include <string>
-# include <map>
-# include <limits>
-# include <stdlib.h>
+#include "DataBtc.hpp"
 
-typedef std::string str;
-typedef std::multimap<str, str> database;
+class BitcoinExchange:public DataBtc {
+	public:
+		BitcoinExchange(std::string filename);
+		BitcoinExchange(const BitcoinExchange &other);
+		BitcoinExchange& operator=(const BitcoinExchange &other);
+		~BitcoinExchange();
 
-float 	stoff(const std::string& str);
-bool	verifyDate(str date);
-bool	verifyValue(str value);
-str		getElfromDate(str date, int element);
-
-database::iterator findNearestDate(database &db, str needle_date);
+		struct CompareDateRows {
+			bool operator()(const DataBtc::Row &a, const DataBtc::Row &b) const {
+				if (a.year != b.year) return a.year < b.year;
+				if (a.month != b.month) return a.month < b.month;
+				return a.day < b.day;
+			}
+		};
+		void	insertDatabase();
+		Row		findNearest(const Row &search) const;
+	
+	private:
+		std::multimap<DataBtc::Row, double, CompareDateRows> database;
+		
+};
 
 #endif
