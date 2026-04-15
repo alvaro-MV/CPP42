@@ -1,17 +1,17 @@
 #include "PmergeMe.hpp"
 
 
-void printList(const listBin& lb, const std::string& name) {
-    std::cout << name << ": ";
-    int i = 0;
-    for (const auto& binding : lb) {
-        std::cout << "(" << binding << ") ";
-        i++;
-        if (i % 2 == 0)
-            std::cout << "| ";
-    }
-    std::cout << std::endl;
-}
+// void printList(const listBin& lb, const std::string& name) {
+//     std::cout << name << ": ";
+//     int i = 0;
+//     for (const auto& binding : lb) {
+//         std::cout << "(" << binding << ") ";
+//         i++;
+//         if (i % 2 == 0)
+//             std::cout << "| ";
+//     }
+//     std::cout << std::endl;
+// }
 
 /*
 	Basicamente lo que hay que hacer es:
