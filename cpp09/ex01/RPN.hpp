@@ -6,7 +6,7 @@
 # include <bits/stdc++.h>
 #include <cassert>
 
-typedef std::vector<std::string> tokens;
+typedef std::list<std::string> tokens;
 
 int	parseInt(const std::string& str);
 int apply_op(int a, int b, const std::string& op);
