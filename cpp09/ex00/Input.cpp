@@ -17,7 +17,7 @@ void Input::findAndPrintRows(BitcoinExchange &db) {
 	DataBtc::Row nearest;
 
 	readLine(line);
-	if (line  == "date | value")
+	if (line  != "date | value")
 		std::cout << "Error: incorrect header in file. Must be \"date | value\"" << std::endl;
 
 	while(readLine(line)) {
@@ -25,6 +25,7 @@ void Input::findAndPrintRows(BitcoinExchange &db) {
 		try {
 			row = fillRow(dateAndValue);
 			nearest = db.findNearest(row);
+			std::cout << "Fecha del nearest: " << nearest.year << "-" << nearest.month << "-" << nearest.day << std::endl; 
 			std::cout << dateAndValue.first << " ==> " << row.value << " = " << row.value * nearest.value << std::endl;
 		}
 		catch(std::exception &e) {

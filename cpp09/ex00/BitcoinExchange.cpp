@@ -16,7 +16,7 @@ void	BitcoinExchange::insertDatabase() {
 	DataBtc::Row row;
 
 	readLine(line);
-	if (line  == "date,exchange_rate")
+	if (line  != "date,exchange_rate")
 		std::cout << "Error: incorrect header in file. Must be \"date,exchange_rate\"" << std::endl;
 
 	while(readLine(line)) {

@@ -43,7 +43,6 @@ DataBtc::~DataBtc() {
 
 bool DataBtc::readLine(std::string &line){
 	if (!std::getline(file, line)) {
-		std::cout << "Line: " << line << std::endl;
 		return (false);
 	}
 	return (true);
