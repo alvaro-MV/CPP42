@@ -27,10 +27,27 @@ std::string remove_extra_spaces(const std::string& input) {
     return result;
 }
 
-bool is_number(std::string& s) {
-    std::string::const_iterator it = s.begin();
-    while (it != s.end() && std::isdigit(*it)) ++it;
-    return !s.empty() && it == s.end();
+bool is_number(const std::string& s) {
+    if (s.empty())
+        return false;
+
+    size_t i = 0;
+
+    if (s[i] == '-' || s[i] == '+')
+    {
+        if (s.size() == 1)
+            return false;
+        i++;
+    }
+
+    while (i < s.size())
+    {
+        if (!std::isdigit(static_cast<unsigned char>(s[i])))
+            return false;
+        i++;
+    }
+
+    return true;
 }
 
 bool	is_op(std::string s) {
@@ -41,38 +58,53 @@ bool	is_op(std::string s) {
 		return (false);
 }
 
-bool	is_valid_input(tokens tok) {
-	for (size_t i = 0; i < tok.size() - 1; i++) {
-		if (!is_number(tok[i]) && !is_op(tok[i]))
-			return (false);
-	}
-	return (true);
+
+bool is_valid_input(const tokens &tok)
+{
+    for (tokens::const_iterator it = tok.begin(); it != tok.end(); ++it)
+    {
+        std::string s = *it;
+        if (!is_number(s) && !is_op(s))
+            return false;
+    }
+    return true;
 }
 
-int	RPN_calc(tokens &toks) {
-	std::stack<int> st;
-	int a;
-	int b;
-	int result;
-	int num;
+int RPN_calc(tokens &toks)
+{
+    std::stack<int> st;
+    int a;
+    int b;
+    int result;
+    int num;
 
-	for (size_t i = 0; i < toks.size(); i++) {
-		if (is_op(toks[i])) {
-			if (st.size() < 2)
-				throw std::runtime_error("Error");
-			b = st.top(); st.pop();
-            a = st.top(); st.pop();
-			result = apply_op(a, b, toks[i]);
-			st.push(result);
-		}
-		else {
-			num = parseInt(toks[i]);
+    for (tokens::iterator it = toks.begin(); it != toks.end(); ++it)
+    {
+        if (is_op(*it))
+        {
+            if (st.size() < 2)
+                throw std::runtime_error("Error");
+
+            b = st.top();
+            st.pop();
+
+            a = st.top();
+            st.pop();
+
+            result = apply_op(a, b, *it);
+            st.push(result);
+        }
+        else
+        {
+            num = parseInt(*it);
             st.push(num);
-		}
-	}
-	if (st.size() != 1)
-		throw std::runtime_error("Error");
-	return st.top();
+        }
+    }
+
+    if (st.size() != 1)
+        throw std::runtime_error("Error");
+
+    return st.top();
 }
 
 int	main(int argc, char **argv) {
@@ -81,12 +113,21 @@ int	main(int argc, char **argv) {
 		std::cout << "\tp.e. ./RPN \"7 7 * 7 -\"" << std::endl;
 		return (1);
 	}
-	tokens	toks = get_tokens(remove_extra_spaces(argv[1]));
 	
-	try {
-		std::cout << RPN_calc(toks) << std::endl;
-	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	tokens toks = get_tokens(remove_extra_spaces(argv[1]));
+
+    try
+    {
+        if (!is_valid_input(toks))
+            throw std::runtime_error("Error");
+
+        std::cout << RPN_calc(toks) << std::endl;
+    }
+    catch (std::exception &e)
+    {
+        std::cout << e.what() << std::endl;
+        return 1;
+    }
+
+    return 0;
 }
