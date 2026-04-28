@@ -23,7 +23,7 @@ void Input::findAndPrintRows(BitcoinExchange &db) {
 	while(readLine(line)) {
 		std::pair<std::string, std::string> dateAndValue = getDateAndValue(line);
 		try {
-			row = fillRow(dateAndValue);
+			row = fillRow(dateAndValue, false);
 			nearest = db.findNearest(row);
 			std::cout << "Fecha del nearest: " << nearest.year << "-" << nearest.month << "-" << nearest.day << std::endl; 
 			std::cout << dateAndValue.first << " ==> " << row.value << " = " << row.value * nearest.value << std::endl;

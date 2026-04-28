@@ -40,7 +40,7 @@ class DataBtc {
 		// A partir de aqui la mayoria irá en privado.
 		bool readLine(std::string &line);
 		std::pair<std::string, std::string> getDateAndValue(std::string &line);
-		Row fillRow(std::pair<std::string, std::string> dateAndValue);
+		Row fillRow(std::pair<std::string, std::string> dateAndValue, bool is_exchange);
 
 		class BadInput: public std::exception {
 			const std::string _msg;

@@ -22,7 +22,7 @@ void	BitcoinExchange::insertDatabase() {
 	while(readLine(line)) {
 		std::pair<std::string, std::string> dateAndValue = getDateAndValue(line);
 		try {
-			row = fillRow(dateAndValue);
+			row = fillRow(dateAndValue, true);
 			std::pair<DataBtc::Row, double> database_entry(row, row.value);
 			database.insert(database_entry);
 		}

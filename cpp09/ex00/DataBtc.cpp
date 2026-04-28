@@ -57,7 +57,7 @@ std::pair<std::string, std::string> DataBtc::getDateAndValue(std::string &line) 
 	return (dateAndValue);
 }
 
-DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) {
+DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue, bool is_exchange) {
 	std::string date = dateAndValue.first;
 	std::string value = dateAndValue.second;
 	std::string year;
@@ -104,7 +104,7 @@ DataBtc::Row	DataBtc::fillRow(std::pair<std::string, std::string> dateAndValue) 
 		throw BadInput("NO valor numérico.");
 	else if (row.value < 0)
 		throw BadInput("not a positive number.");
-	else if (row.value > 1000)
+	else if (row.value > 1000 && !is_exchange)
 		throw BadInput("too large a number.");
 
 
